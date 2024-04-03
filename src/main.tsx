@@ -1,5 +1,5 @@
 import React from 'react'
-import App from './App.tsx'
+import App from './page/App.tsx'
 import ReactDOM from 'react-dom/client'
 import { ChakraProvider } from '@chakra-ui/react'
 import './index.css'
