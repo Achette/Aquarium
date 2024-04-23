@@ -9,7 +9,7 @@ export const theme = extendTheme({
   },
   colors: {
     blue: {
-      50: '#0157A399', // Transparency
+      50: '#0157A31A', // Transparency
       400: '#3DC1FF', // Secondary
       900: '#0157A3', // Primary
     },
@@ -20,7 +20,8 @@ export const theme = extendTheme({
       400: '#FC94D2', // Details
     },
     gray: {
-      100: '#D9D9E3',
+      100: ' #12121D4D',
+      400: '#898A8D',
     },
   },
 })
