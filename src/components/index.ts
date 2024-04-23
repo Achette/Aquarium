@@ -1,0 +1,5 @@
+export * from './Aquario/index'
+export * from './HomeButtons/index'
+export * from './Full-Logo/index'
+export * from './CloudsBg/index'
+export * from './Slider/index'
