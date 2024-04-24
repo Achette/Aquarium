@@ -1,14 +1,14 @@
 import { CloudsBg, VerticalLogo } from '@/components'
-import {  VStack } from '@chakra-ui/react'
+import { Box, VStack } from '@chakra-ui/react'
 import { Outlet } from 'react-router-dom'
 
 export const Account = () => {
   return (
-    <VStack mt="-2rem">
+    <VStack mt="2rem">
       <CloudsBg />
-      <VerticalLogo />
-
-   
+      <Box mt="-4rem">
+        <VerticalLogo />
+      </Box>
 
       <Outlet />
     </VStack>
