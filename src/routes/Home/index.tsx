@@ -10,6 +10,7 @@ import {
 
 export const Home = () => {
   const { isDesktop, isMobile } = useMedia()
+
   return (
     <Box h="100vh" w="100%" overflowX="hidden">
       <VStack>
