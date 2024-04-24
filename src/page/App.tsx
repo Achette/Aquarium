@@ -1,4 +1,5 @@
-import { Home } from '@/routes'
+import { Account, Home, Login, Register } from '@/routes'
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
@@ -6,8 +7,10 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />}>
-            <Route path='/account' index />
+          <Route path="/" element={<Home />} />
+          <Route path="/account" element={<Account />}>
+            <Route index element={<Login />} />
+            <Route path="/account/register" element={<Register />} />
           </Route>
         </Routes>
       </BrowserRouter>

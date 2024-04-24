@@ -1,3 +1,4 @@
+import { Box, VStack } from '@chakra-ui/react'
 import {
   AquarioImg,
   BenefitsSlider,
@@ -5,9 +6,12 @@ import {
   FullLogo,
   HomeButtons,
 } from '@/components'
-import { Box, VStack } from '@chakra-ui/react'
+
 
 export const Home = () => {
+
+
+
   return (
     <Box h="100vh" w="100%" overflowX="hidden">
       <VStack>
