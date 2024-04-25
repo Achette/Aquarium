@@ -10,7 +10,7 @@ export const Main = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Text color="blue.900">Nenhum aquário cadastrado</Text>
+        <Text color="blue.900">Nenhum aquário cadastrado 😿</Text>
       </VStack>
 
       <AddButton />

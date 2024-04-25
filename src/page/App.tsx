@@ -13,9 +13,7 @@ function App() {
             <Route index element={<Login />} />
             <Route path="/account/register" element={<Register />} />
           </Route>
-          <Route path="/home" element={<Main />}>
-
-          </Route>
+          <Route path="/home" element={<Main />}></Route>
         </Routes>
       </BrowserRouter>
     </>

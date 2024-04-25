@@ -9,7 +9,7 @@ export const AddButton = () => {
     <LinkChakra title="Add">
       <VStack
         position="fixed"
-        right={isMobileOrTablet ? 8 : '22%'}
+        right={isMobileOrTablet ? 8 : '11%'}
         bottom={isMobileOrTablet ? 8 : 12}
       >
         <Icon
