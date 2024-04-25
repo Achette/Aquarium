@@ -30,6 +30,7 @@ export const HomeButtons = () => {
         bg="blue.900"
         color="white.400"
         fontWeight={400}
+        _hover={{ bgColor: isMobileOrTablet ? 'transparent' : 'blue.500' }}
         onClick={() => navigate('/account')}
       >
         Entrar
