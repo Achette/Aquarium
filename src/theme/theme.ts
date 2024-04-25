@@ -15,6 +15,7 @@ export const theme = extendTheme({
     },
     white: {
       400: '#D9D9E3',
+      900: '#FFF'
     },
     pink: {
       400: '#FC94D2', // Details
