@@ -14,7 +14,7 @@ import {
   Link as LinkChakra,
 } from '@chakra-ui/react'
 
-export type NewUserProps = {
+type NewUserProps = {
   name: string
   email: string
   password: string

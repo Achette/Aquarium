@@ -1,7 +1,5 @@
-import { Account, Home, Login, NewAquarium, Register } from '@/routes'
-import { Main } from '@/routes/Main'
-
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Account, Home, Login, NewAquarium, Register, Main } from '@/routes'
 
 function App() {
   return (
