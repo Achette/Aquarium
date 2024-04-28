@@ -1,20 +1,20 @@
-import { Link } from 'react-router-dom'
-import { ButtonProps } from '../ContinueButton'
-import { Button, Link as LinkChakra } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 
-export const BackButton = ({ path }: ButtonProps) => {
+export const BackButton = () => {
+  const navigate = useNavigate()
+  
   return (
-    <LinkChakra as={Link} to={path}>
-      <Button
-        w="19.5rem"
-        h="3rem"
-        borderRadius="3.75rem"
-        variant="outline"
-        colorScheme="blue"
-        fontSize="1rem"
-      >
-        Voltar
-      </Button>
-    </LinkChakra>
+    <Button
+      w="19.5rem"
+      h="3rem"
+      borderRadius="3.75rem"
+      variant="outline"
+      colorScheme="blue"
+      fontSize="1rem"
+      onClick={() => navigate(-1)}
+    >
+      Voltar
+    </Button>
   )
 }

@@ -16,12 +16,14 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 
 type NewAquariumProps = {
   name: string
 }
 export const NewAquarium = () => {
   const { isMobile, isDesktop } = useMedia()
+  const navigate = useNavigate()
 
   const {
     register,
@@ -31,10 +33,16 @@ export const NewAquarium = () => {
 
   const onSubmit: SubmitHandler<NewAquariumProps> = (data) => {
     console.log(data)
+    navigate('/new-aquarium/accessory')
   }
   return (
     <Box p="1.5rem 1rem 0" px={isDesktop ? '16%' : ''}>
-      <Heading as="h2" color="blue.900" fontSize="1.75rem">
+      <Heading
+        as="h2"
+        color="blue.900"
+        fontSize="1.75rem"
+        textAlign={isDesktop ? 'center' : 'start'}
+      >
         Novo Aquário
       </Heading>
       <VStack>
