@@ -90,13 +90,13 @@ export const NewAquarium = () => {
             </Button>
 
             <Button
-              type="submit"
               w="19.5rem"
               h="3rem"
               colorScheme="blue"
               variant="outline"
               borderRadius="3.75rem"
               fontSize="1rem"
+              onClick={() => navigate(-1)}
             >
               Voltar
             </Button>
