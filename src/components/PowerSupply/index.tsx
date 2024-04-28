@@ -9,7 +9,7 @@ type PowerSupplyProps = {
   icon: IconType
   active: boolean
 }
-export const PowerSupply = () => {
+export const AquariumPowerSupply = () => {
   const [selectedPower, setSelectedPower] = React.useState<PowerSupplyProps>()
   const [power, setPower] = React.useState<PowerSupplyProps[]>([
     {
