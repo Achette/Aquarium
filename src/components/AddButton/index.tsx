@@ -1,12 +1,13 @@
 import { useMedia } from '@/hooks'
 import { IoIosAdd } from 'react-icons/io'
 import { Icon, Link as LinkChakra, Text, VStack } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 
 export const AddButton = () => {
   const { isMobileOrTablet } = useMedia()
 
   return (
-    <LinkChakra title="Add">
+    <LinkChakra as={Link} to="/new-aquarium">
       <VStack
         position="fixed"
         right={isMobileOrTablet ? 8 : '11%'}
