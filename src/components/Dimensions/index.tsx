@@ -37,12 +37,10 @@ export const AquariumDimensions = () => {
     setDimensions((prevDimensions) => {
       const newDimensions = [...prevDimensions]
 
-      if (index !== -1) {
-        if (newDimensions[index].value <= 0) {
-          newDimensions[index].value = 0
-        } else {
-          newDimensions[index].value -= 0.5
-        }
+      if (newDimensions[index].value <= 0) {
+        newDimensions[index].value = 0
+      } else {
+        newDimensions[index].value -= 0.5
       }
 
       return newDimensions
