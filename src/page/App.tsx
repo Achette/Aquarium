@@ -1,5 +1,15 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Account, Home, Login, NewAquarium, Register, Main } from '@/routes'
+import {
+  Account,
+  Home,
+  Login,
+  NewAquarium,
+  Register,
+  Main,
+  AquariumAccessory,
+  AquariumSensor,
+  AquariumPets,
+} from '@/routes'
 
 function App() {
   return (
@@ -12,7 +22,13 @@ function App() {
             <Route path="/account/register" element={<Register />} />
           </Route>
           <Route path="/home" element={<Main />}></Route>
-          <Route path="/new-aquarium" element={<NewAquarium />}></Route>
+          <Route path="/new-aquarium" element={<NewAquarium />} />
+          <Route
+            path="/new-aquarium/accessory"
+            element={<AquariumAccessory />}
+          />
+          <Route path="/new-aquarium/sensors" element={<AquariumSensor />} />
+          <Route path="/new-aquarium/pets" element={<AquariumPets />} />
         </Routes>
       </BrowserRouter>
     </>
