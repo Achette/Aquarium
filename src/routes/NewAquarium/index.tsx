@@ -1,6 +1,10 @@
 import { useMedia } from '@/hooks'
+import { useAquarium } from '@/context'
+import { NewAquariumProps } from '@/models'
+import { useNavigate } from 'react-router-dom'
 import { AquariumFormats } from '@/components/Formats'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { AquariumServices } from '@/services/aquarium-services'
 import {
   AquariumDimensions,
   AquariumMaterial,
@@ -16,14 +20,12 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import { useNavigate } from 'react-router-dom'
 
-type NewAquariumProps = {
-  name: string
-}
 export const NewAquarium = () => {
   const { isMobile, isDesktop } = useMedia()
   const navigate = useNavigate()
+
+  const { format, material, powerSupply } = useAquarium()
 
   const {
     register,
@@ -31,8 +33,15 @@ export const NewAquarium = () => {
     formState: { errors },
   } = useForm<NewAquariumProps>()
 
-  const onSubmit: SubmitHandler<NewAquariumProps> = (data) => {
-    console.log(data)
+  const onSubmit: SubmitHandler<NewAquariumProps> = async (data) => {
+    const newAquarium = {
+      name: data.name,
+      format,
+      material,
+      powerSupply,
+    }
+
+    await AquariumServices.create(newAquarium)
     navigate('/new-aquarium/accessory')
   }
   return (

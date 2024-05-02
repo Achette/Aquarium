@@ -1,16 +1,16 @@
-import { HStack, Heading, Icon, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
-import { IconType } from 'react-icons'
+import { useAquarium } from '@/context'
+import { PowerSupplyProps } from '@/models'
 import { BsFillLightningFill } from 'react-icons/bs'
+import { HStack, Heading, Icon, Text, VStack } from '@chakra-ui/react'
 
-type PowerSupplyProps = {
-  id: number
-  volts: string
-  icon: IconType
-  active: boolean
-}
 export const AquariumPowerSupply = () => {
-  const [selectedPower, setSelectedPower] = React.useState<PowerSupplyProps>()
+  const [selectedPower, setSelectedPower] = React.useState<PowerSupplyProps>({
+    id: 0,
+    volts: '',
+    icon: undefined,
+    active: false,
+  })
   const [power, setPower] = React.useState<PowerSupplyProps[]>([
     {
       id: 1,
@@ -25,6 +25,15 @@ export const AquariumPowerSupply = () => {
       active: false,
     },
   ])
+
+  const { setPowerSupply } = useAquarium()
+
+  React.useEffect(() => {
+    if (!selectedPower.volts) {
+      setSelectedPower(power[0])
+    }
+    power
+  }, [power, selectedPower])
 
   const handleSetActive = (id: number) => {
     const updatedPower = power.map((pow) => {
@@ -42,12 +51,7 @@ export const AquariumPowerSupply = () => {
     handleSetActive(pow.id)
   }
 
-  React.useEffect(() => {
-    if (!selectedPower) {
-      setSelectedPower(power[0])
-    }
-    power
-  }, [power, selectedPower])
+  setPowerSupply(selectedPower.volts)
 
   return (
     <VStack w="20.5rem" alignItems="flex-start" mt="1.5rem">

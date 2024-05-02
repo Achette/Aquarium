@@ -1,14 +1,14 @@
-import { HStack, Heading, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
+import { useAquarium } from '@/context'
+import { MaterialProps } from '@/models'
+import { HStack, Heading, Text, VStack } from '@chakra-ui/react'
 
-type MaterialProps = {
-  id: number
-  name: string
-  active: boolean
-}
 export const AquariumMaterial = () => {
-  const [selectedMaterial, setSelectedMaterial] =
-    React.useState<MaterialProps>()
+  const [selectedMaterial, setSelectedMaterial] = React.useState<MaterialProps>(
+    { id: 0, name: '', active: false }
+  )
+
+  const { setMaterial } = useAquarium()
 
   const [materials, setMaterials] = React.useState<MaterialProps[]>([
     {
@@ -27,6 +27,13 @@ export const AquariumMaterial = () => {
       active: false,
     },
   ])
+  React.useEffect(() => {
+    if (!selectedMaterial?.name) {
+      setSelectedMaterial(materials[0])
+    }
+
+    materials
+  }, [materials, selectedMaterial])
 
   const handleSetActive = (id: number) => {
     const updatedMaterials = materials.map((material) => {
@@ -44,15 +51,7 @@ export const AquariumMaterial = () => {
     handleSetActive(material.id)
   }
 
-  React.useEffect(() => {
-    if (!selectedMaterial) {
-      setSelectedMaterial(materials[0])
-    }
-
-    materials
-  }, [materials, selectedMaterial])
-
-  console.log(selectedMaterial)
+  setMaterial(selectedMaterial.name)
 
   return (
     <VStack w="20.5rem" alignItems="flex-start" mt="1.5rem">

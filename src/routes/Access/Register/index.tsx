@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { CiMail, CiUnlock } from 'react-icons/ci'
 import { PiUserThin } from 'react-icons/pi'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   Box,
   Button,
@@ -12,9 +12,13 @@ import {
   InputLeftElement,
   Text,
   Link as LinkChakra,
+  useToast,
 } from '@chakra-ui/react'
+import { UserService } from '@/services/user-service'
+import { useMedia } from '@/hooks'
 
-type NewUserProps = {
+export type NewUserProps = {
+  id: string
   name: string
   email: string
   password: string
@@ -27,8 +31,25 @@ export const Register = () => {
     formState: { errors },
   } = useForm<NewUserProps>()
 
-  const onSubmit: SubmitHandler<NewUserProps> = (data) => {
-    console.log(data)
+  const navigate = useNavigate()
+  const toast = useToast()
+  const { isMobileOrTablet } = useMedia()
+
+  const onSubmit: SubmitHandler<NewUserProps> = async (data) => {
+    try {
+      await UserService.create(data)
+
+      toast({
+        description: `Conta cadastrada com sucesso!`,
+        containerStyle: { color: 'white' },
+        position: isMobileOrTablet ? 'top' : 'bottom-right',
+        isClosable: true,
+      })
+
+      navigate('/account')
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (

@@ -1,17 +1,18 @@
-import { HStack, Heading, Image, Text, VStack } from '@chakra-ui/react'
-import rectangular from '../../assets/icons/format1.svg'
-import circle from '../../assets/icons/format2.svg'
-import hex from '../../assets/icons/format3.svg'
 import React from 'react'
+import { FormatProps } from '@/models'
+import { useAquarium } from '@/context'
+import hex from '../../assets/icons/format3.svg'
+import circle from '../../assets/icons/format2.svg'
+import rectangular from '../../assets/icons/format1.svg'
+import { HStack, Heading, Image, Text, VStack } from '@chakra-ui/react'
 
-type FormatProps = {
-  id: number
-  format: string
-  icon: string
-  active: boolean
-}
 export const AquariumFormats = () => {
-  const [selectFormat, setSelectFormat] = React.useState<FormatProps>()
+  const [selectFormat, setSelectFormat] = React.useState<FormatProps>({
+    id: 0,
+    active: false,
+    format: '',
+    icon: '',
+  })
   const [formats, setFormats] = React.useState<FormatProps[]>([
     {
       id: 1,
@@ -32,6 +33,15 @@ export const AquariumFormats = () => {
       active: false,
     },
   ])
+  const { setFormat } = useAquarium()
+
+  React.useEffect(() => {
+    if (!selectFormat.format) {
+      setSelectFormat(formats[0])
+    }
+
+    formats
+  }, [formats, selectFormat])
 
   const hanldleActive = (id: number) => {
     const updatedFormats = formats.map((format) => {
@@ -49,15 +59,7 @@ export const AquariumFormats = () => {
     hanldleActive(format.id)
   }
 
-  React.useEffect(() => {
-    if (!selectFormat) {
-      setSelectFormat(formats[0])
-    }
-
-    formats
-  }, [formats, selectFormat])
-
-  console.log(selectFormat)
+  setFormat(selectFormat.format)
 
   return (
     <VStack w="20.5rem" alignItems="flex-start">
