@@ -9,7 +9,9 @@ import {
   AquariumAccessory,
   AquariumSensor,
   AquariumPets,
+  AquariumDash,
 } from '@/routes'
+import { AquariumInfo } from '@/routes/Aquarium/Info'
 
 function App() {
   return (
@@ -29,6 +31,10 @@ function App() {
           />
           <Route path="/new-aquarium/sensors" element={<AquariumSensor />} />
           <Route path="/new-aquarium/pets" element={<AquariumPets />} />
+
+          <Route path={`/aquarium/:id`} element={<AquariumDash />}>
+            <Route index element={<AquariumInfo />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
