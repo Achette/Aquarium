@@ -25,6 +25,7 @@ export type PowerSupplyProps = {
 }
 
 export type AquariumProps = {
+  id: string
   name: string
   format: string
   material: string
