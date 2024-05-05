@@ -1,13 +1,13 @@
 import React from 'react'
 import { useMedia } from '@/hooks'
 import { BackButton, ContinueButton } from '@/components'
-import { Box, Flex, Heading, Image, Text, VStack } from '@chakra-ui/react'
 import Light from '../../../assets/accessories/5_led.svg'
 import Feeder from '../../../assets/accessories/2_feeder.svg'
 import Filter from '../../../assets/accessories/4_filter.svg'
 import Plants from '../../../assets/accessories/6_accessories.svg'
 import WaterPump from '../../../assets/accessories/1_waterPump.svg'
 import Thermostat from '../../../assets/accessories/3_thermostat.svg'
+import { Box, Flex, Heading, Image, Text, VStack } from '@chakra-ui/react'
 
 export const AquariumAccessory = () => {
   const { isDesktop, isMobile } = useMedia()

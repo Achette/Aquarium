@@ -3,7 +3,7 @@ import { AquariumProps } from '@/models'
 import axios from 'axios'
 
 export const AquariumServices = {
-  create: async (data: AquariumProps) => {
+  create: async (data: Omit<AquariumProps, 'id'>) => {
     const response = await axios.post(`${BASE_URL}/aquarium`, data)
     return response.data
   },
