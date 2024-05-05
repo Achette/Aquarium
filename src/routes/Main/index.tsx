@@ -5,10 +5,12 @@ import { BuildSVG } from '@/utils/buildSVG'
 import { AddButton, Header } from '@/components'
 import { AquariumServices } from '@/services/aquarium-services'
 import { Box, HStack, Image, Text, VStack } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 
 export const Main = () => {
   const [aquariums, setAquariums] = React.useState<AquariumProps[]>()
   const { isMobile } = useMedia()
+  const navigate = useNavigate()
 
   const fetchAquariums = React.useCallback(async () => {
     try {
@@ -35,7 +37,7 @@ export const Main = () => {
               maxWidth="58rem"
               w="full"
               px={isMobile ? '2rem' : '1rem'}
-             mb="1rem"
+              mb="1rem"
             >
               <HStack
                 w="full"
@@ -44,6 +46,7 @@ export const Main = () => {
                 p=".25rem 1rem"
                 borderRadius="100"
                 gap="1rem"
+                onClick={() => navigate(`/aquarium/${aquarium.id}`)}
               >
                 <Image
                   src={BuildSVG(aquarium.format)}
@@ -61,7 +64,11 @@ export const Main = () => {
             </HStack>
           ))}
 
-       { !aquariums?.length && <Text color="blue.900" margin="auto">Nenhum aquário cadastrado 😿</Text> }
+        {!aquariums?.length && (
+          <Text color="blue.900" margin="auto">
+            Nenhum aquário cadastrado 😿
+          </Text>
+        )}
       </VStack>
 
       <AddButton />
