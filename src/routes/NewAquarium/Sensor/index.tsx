@@ -1,16 +1,20 @@
-import { useMedia } from '@/hooks'
-import { Box, Flex, Heading, Image, Text, VStack } from '@chakra-ui/react'
-import luminosity from '../../../assets/sensors/1_luminosity.svg'
-import oxygen from '../../../assets/sensors/2_oxigen.svg'
-import waterLevel from '../../../assets/sensors/3_water_level.svg'
-import pH from '../../../assets/sensors/4_ph.svg'
-import outsideTemperature from '../../../assets/sensors/5_outside_temperature.svg'
-import insideTemperature from '../../../assets/sensors/6_inside_temperature.svg'
 import React from 'react'
+import { useMedia } from '@/hooks'
+import * as localStorageService from '@/hooks'
+import pH from '../../../assets/sensors/4_ph.svg'
 import { BackButton, ContinueButton } from '@/components'
+import oxygen from '../../../assets/sensors/2_oxigen.svg'
+import luminosity from '../../../assets/sensors/1_luminosity.svg'
+import waterLevel from '../../../assets/sensors/3_water_level.svg'
+import { Box, Flex, Heading, Image, Text, VStack } from '@chakra-ui/react'
+import insideTemperature from '../../../assets/sensors/6_inside_temperature.svg'
+import outsideTemperature from '../../../assets/sensors/5_outside_temperature.svg'
+import { AquariumServices } from '@/services/aquarium-services'
+import { useNavigate } from 'react-router-dom'
 
 export const AquariumSensor = () => {
   const { isDesktop, isMobile } = useMedia()
+  const navigate = useNavigate()
 
   const [sensors, setSensors] = React.useState([
     {
@@ -64,6 +68,20 @@ export const AquariumSensor = () => {
     })
   }
 
+  const handleSubmit = React.useCallback(async () => {
+    const data = {
+      aquariumId: localStorageService.getAquariumId(),
+      sensors: { ...sensors },
+    }
+
+    try {
+      await AquariumServices.newSensors(data)
+      navigate('/new-aquarium/pets')
+    } catch (e) {
+      /* empty */
+    }
+  }, [navigate, sensors])
+
   return (
     <Box px={isDesktop ? '16%' : '.25rem'} mt="1.5rem">
       <Heading
@@ -108,7 +126,9 @@ export const AquariumSensor = () => {
         justifyContent="center"
         mt="1.75rem"
       >
-        <ContinueButton data={sensors} path="/new-aquarium/pets" />
+        <Box onClick={handleSubmit}>
+          <ContinueButton />
+        </Box>
         <BackButton />
       </Flex>
     </Box>

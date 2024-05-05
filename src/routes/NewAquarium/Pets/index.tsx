@@ -1,3 +1,14 @@
+import React from 'react'
+import { useMedia } from '@/hooks'
+import * as localStorageService from '@/hooks'
+import { useNavigate } from 'react-router-dom'
+import { FaMinus, FaPlus } from 'react-icons/fa6'
+import fish from '../../../assets/pets/1_fish.svg'
+import frog from '../../../assets/pets/3_frog.svg'
+import snake from '../../../assets/pets/4_snake.svg'
+import turtle from '../../../assets/pets/2_turtle.svg'
+import { BackButton, ContinueButton } from '@/components'
+import { AquariumServices } from '@/services/aquarium-services'
 import {
   Box,
   Flex,
@@ -8,17 +19,10 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import React from 'react'
-import fish from '../../../assets/pets/1_fish.svg'
-import turtle from '../../../assets/pets/2_turtle.svg'
-import frog from '../../../assets/pets/3_frog.svg'
-import snake from '../../../assets/pets/4_snake.svg'
-import { useMedia } from '@/hooks'
-import { BackButton, ContinueButton } from '@/components'
-import { FaMinus, FaPlus } from 'react-icons/fa6'
 
 export const AquariumPets = () => {
   const { isDesktop, isMobile } = useMedia()
+  const navigate = useNavigate()
 
   const [pets, setPets] = React.useState([
     {
@@ -90,6 +94,20 @@ export const AquariumPets = () => {
     })
   }
 
+  const handleSubmit = React.useCallback(async () => {
+    const data = {
+      aquariumId: localStorageService.getAquariumId(),
+      sensors: { ...pets },
+    }
+
+    try {
+      await AquariumServices.newPets(data)
+      navigate('/home')
+    } catch (e) {
+      /* empty */
+    }
+  }, [navigate, pets])
+
   return (
     <Box px={isDesktop ? '16%' : '.25rem'} mt="1.5rem">
       <Heading
@@ -155,7 +173,9 @@ export const AquariumPets = () => {
         justifyContent="center"
         mt="1.75rem"
       >
-        <ContinueButton data={pets} path="/home" />
+        <Box onClick={handleSubmit}>
+          <ContinueButton />
+        </Box>
         <BackButton />
       </Flex>
     </Box>

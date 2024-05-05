@@ -8,9 +8,13 @@ import Plants from '../../../assets/accessories/6_accessories.svg'
 import WaterPump from '../../../assets/accessories/1_waterPump.svg'
 import Thermostat from '../../../assets/accessories/3_thermostat.svg'
 import { Box, Flex, Heading, Image, Text, VStack } from '@chakra-ui/react'
+import * as localStorageService from '@/hooks'
+import { AquariumServices } from '@/services/aquarium-services'
+import { useNavigate } from 'react-router-dom'
 
 export const AquariumAccessory = () => {
   const { isDesktop, isMobile } = useMedia()
+  const navigate = useNavigate()
 
   const [accessories, setAccessories] = React.useState([
     {
@@ -64,6 +68,20 @@ export const AquariumAccessory = () => {
     })
   }
 
+  const handleSubmit = React.useCallback(async () => {
+    const data = {
+      aquariumId: localStorageService.getAquariumId(),
+      accessories: { ...accessories },
+    }
+
+    try {
+      await AquariumServices.newAccessories(data)
+      navigate("/new-aquarium/sensors")
+    } catch (e) {
+      /* empty */
+    }
+  }, [accessories])
+
   return (
     <Box px={isDesktop ? '16%' : '.25rem'} mt="1.5rem">
       <Heading
@@ -108,7 +126,9 @@ export const AquariumAccessory = () => {
         justifyContent="center"
         mt="1.75rem"
       >
-        <ContinueButton data={accessories} path="/new-aquarium/sensors" />
+        <Box onClick={handleSubmit}>
+          <ContinueButton />
+        </Box>
         <BackButton />
       </Flex>
     </Box>

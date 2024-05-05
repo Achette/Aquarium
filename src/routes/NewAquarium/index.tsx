@@ -19,11 +19,14 @@ import {
   Input,
   Text,
   VStack,
+  useToast,
 } from '@chakra-ui/react'
+import * as localStorageService from '@/hooks'
 
 export const NewAquarium = () => {
-  const { isMobile, isDesktop } = useMedia()
+  const toast = useToast()
   const navigate = useNavigate()
+  const { isMobile, isDesktop, isMobileOrTablet } = useMedia()
 
   const { format, material, powerSupply } = useAquarium()
 
@@ -41,7 +44,17 @@ export const NewAquarium = () => {
       powerSupply,
     }
 
-    await AquariumServices.create(newAquarium)
+    const response = await AquariumServices.create(newAquarium)
+    const id = response.id
+    localStorageService.saveAquariumId(id)
+
+    toast({
+      description: `Aquário ${newAquarium.name} criado com sucesso!`,
+      containerStyle: { color: 'white' },
+      position: isMobileOrTablet ? 'top' : 'bottom-right',
+      isClosable: true,
+    })
+
     navigate('/new-aquarium/accessory')
   }
   return (
