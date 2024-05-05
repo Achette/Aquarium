@@ -13,7 +13,7 @@ import {
   Link as LinkChakra,
 } from '@chakra-ui/react'
 
-export type NewUserProps = {
+export type UserProps = {
   email: string
   password: string
 }
@@ -22,9 +22,9 @@ export const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<NewUserProps>()
+  } = useForm<UserProps>()
 
-  const onSubmit: SubmitHandler<NewUserProps> = (data) => {
+  const onSubmit: SubmitHandler<UserProps> = (data) => {
     console.log(data)
   }
 

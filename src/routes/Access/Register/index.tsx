@@ -18,7 +18,7 @@ import { UserService } from '@/services/user-service'
 import { useMedia } from '@/hooks'
 
 export type NewUserProps = {
-  id: string
+  
   name: string
   email: string
   password: string
