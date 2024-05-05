@@ -10,8 +10,8 @@ import {
   AquariumSensor,
   AquariumPets,
   AquariumDash,
+  AquariumInfo,
 } from '@/routes'
-import { AquariumInfo } from '@/routes/Aquarium/Info'
 
 function App() {
   return (
