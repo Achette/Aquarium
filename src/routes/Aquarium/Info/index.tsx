@@ -1,21 +1,20 @@
 import React from 'react'
 import { useMedia } from '@/hooks'
 import { Box } from '@chakra-ui/react'
-import { AquariumProps } from '@/models'
 import { useParams } from 'react-router-dom'
-import { AquariumServices } from '@/services/aquarium-services'
+import { AppDispatch } from '@/redux/store'
+import { useDispatch } from 'react-redux'
 import { AquariumDetailsTopBar, DetailsBox } from '@/components'
+import { fetchAquariumDetails } from '@/redux/reducers/aquariumDetails'
 
 export const AquariumInfo = () => {
-  const [aquariumData, setAquariumData] = React.useState<AquariumProps>()
-
-  const { id } = useParams()
   const { isDesktop } = useMedia()
+  const { id } = useParams()
+  const dispatch = useDispatch<AppDispatch>()
 
   const fetchAquarium = React.useCallback(async () => {
-    const response = await AquariumServices.getById(id!)
-    setAquariumData({ ...response })
-  }, [id])
+    dispatch(fetchAquariumDetails(id!))
+  }, [dispatch, id])
 
   React.useEffect(() => {
     fetchAquarium()
@@ -23,10 +22,7 @@ export const AquariumInfo = () => {
 
   return (
     <Box pt="1.5rem" px={isDesktop ? '16%' : '0.5rem'}>
-      <AquariumDetailsTopBar
-        format={aquariumData?.format}
-        name={aquariumData?.name}
-      />
+      <AquariumDetailsTopBar />
       <DetailsBox />
     </Box>
   )

@@ -4,14 +4,14 @@ import { IoMdSettings } from 'react-icons/io'
 import { useNavigate } from 'react-router-dom'
 import { MdArrowBackIos } from 'react-icons/md'
 import { Flex, Icon, Image, Text } from '@chakra-ui/react'
+import { useSelector } from 'react-redux'
+import { getAquariumDetails } from '@/redux/reducers/aquariumDetails'
 
-type DetailsTopBarProps = {
-  name: string | undefined
-  format: string | undefined
-}
-export const AquariumDetailsTopBar = ({ name, format }: DetailsTopBarProps) => {
+export const AquariumDetailsTopBar = () => {
   const { isDesktop } = useMedia()
   const navigate = useNavigate()
+
+  const { name, format } = useSelector(getAquariumDetails)
 
   return (
     <Flex justifyContent="space-between" alignItems="center">
@@ -26,7 +26,7 @@ export const AquariumDetailsTopBar = ({ name, format }: DetailsTopBarProps) => {
       <Flex gap="1rem">
         <Image src={BuildSVG(format)} w={isDesktop ? '3.75rem' : '2.5rem'} />
         <Text
-          w={isDesktop ? '25rem' : '15rem'}
+          w={isDesktop ? '25rem' : '10rem'}
           fontSize={isDesktop ? '2.5rem' : '1.5rem'}
           fontWeight={800}
           color="blue.900"
