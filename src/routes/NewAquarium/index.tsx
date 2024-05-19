@@ -28,7 +28,8 @@ export const NewAquarium = () => {
   const navigate = useNavigate()
   const { isMobile, isDesktop, isMobileOrTablet } = useMedia()
 
-  const { format, material, powerSupply } = useAquarium()
+  const { format, material, powerSupply, thickness, height, volume } =
+    useAquarium()
 
   const {
     register,
@@ -42,6 +43,9 @@ export const NewAquarium = () => {
       format,
       material,
       powerSupply,
+      thickness: thickness.toString().concat('mm'),
+      height: height.toString().concat('cm'),
+      volume: volume.toString().concat('L'),
     }
 
     const response = await AquariumServices.create(newAquarium)
@@ -57,6 +61,7 @@ export const NewAquarium = () => {
 
     navigate('/new-aquarium/accessory')
   }
+
   return (
     <Box p="1.5rem 1rem 0" px={isDesktop ? '16%' : ''}>
       <Heading
