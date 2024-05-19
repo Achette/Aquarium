@@ -75,7 +75,7 @@ export const AquariumSensor = () => {
 
     const data = {
       aquariumId: localStorageService.getAquariumId(),
-      sensors: { ...selectedSensors },
+      sensors:  [...selectedSensors] ,
     }
 
     try {

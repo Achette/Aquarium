@@ -75,7 +75,7 @@ export const AquariumAccessory = () => {
 
     const data = {
       aquariumId: localStorageService.getAquariumId(),
-      accessories: { ...selectedAccessories },
+      accessories: [ ...selectedAccessories] ,
     }
 
     try {

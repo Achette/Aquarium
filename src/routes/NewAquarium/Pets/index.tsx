@@ -97,14 +97,16 @@ export const AquariumPets = () => {
   const handleSubmit = React.useCallback(async () => {
     const selectedPets = pets
       .filter((pet) => pet.selected)
-      .map((pet) => ({
-        name: pet.name,
-        quantity: pet.quantity,
-      }))
+      .reduce((acc, pet) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        acc[pet.name] = { quantity: pet.quantity }
+        return acc
+      }, {})
 
     const data = {
       aquariumId: localStorageService.getAquariumId(),
-      sensors: { ...selectedPets },
+      pets: [selectedPets],
     }
 
     try {
@@ -112,6 +114,8 @@ export const AquariumPets = () => {
       navigate('/home')
     } catch (e) {
       /* empty */
+    } finally {
+      localStorageService.removeAquariumId()
     }
   }, [navigate, pets])
 
