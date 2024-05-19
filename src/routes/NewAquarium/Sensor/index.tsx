@@ -1,16 +1,16 @@
 import React from 'react'
 import { useMedia } from '@/hooks'
 import * as localStorageService from '@/hooks'
-import pH from '../../../assets/sensors/4_ph.svg'
-import { BackButton, ContinueButton } from '@/components'
-import oxygen from '../../../assets/sensors/2_oxigen.svg'
-import luminosity from '../../../assets/sensors/1_luminosity.svg'
-import waterLevel from '../../../assets/sensors/3_water_level.svg'
-import { Box, Flex, Heading, Image, Text, VStack } from '@chakra-ui/react'
-import insideTemperature from '../../../assets/sensors/6_inside_temperature.svg'
-import outsideTemperature from '../../../assets/sensors/5_outside_temperature.svg'
-import { AquariumServices } from '@/services/aquarium-services'
 import { useNavigate } from 'react-router-dom'
+import pH from '../../../assets/img/sensors/4_ph.svg'
+import { BackButton, ContinueButton } from '@/components'
+import oxygen from '../../../assets/img/sensors/2_oxigen.svg'
+import { AquariumServices } from '@/services/aquarium-services'
+import luminosity from '../../../assets/img/sensors/1_luminosity.svg'
+import waterLevel from '../../../assets/img/sensors/3_water_level.svg'
+import { Box, Flex, Heading, Image, Text, VStack } from '@chakra-ui/react'
+import insideTemperature from '../../../assets/img/sensors/6_inside_temperature.svg'
+import outsideTemperature from '../../../assets/img/sensors/5_outside_temperature.svg'
 
 export const AquariumSensor = () => {
   const { isDesktop, isMobile } = useMedia()
@@ -69,9 +69,13 @@ export const AquariumSensor = () => {
   }
 
   const handleSubmit = React.useCallback(async () => {
+    const selectedSensors = sensors
+      .filter((sensor) => sensor.selected)
+      .map((sensor) => sensor.name)
+
     const data = {
       aquariumId: localStorageService.getAquariumId(),
-      sensors: { ...sensors },
+      sensors: { ...selectedSensors },
     }
 
     try {

@@ -3,10 +3,10 @@ import { useMedia } from '@/hooks'
 import * as localStorageService from '@/hooks'
 import { useNavigate } from 'react-router-dom'
 import { FaMinus, FaPlus } from 'react-icons/fa6'
-import fish from '../../../assets/pets/1_fish.svg'
-import frog from '../../../assets/pets/3_frog.svg'
-import snake from '../../../assets/pets/4_snake.svg'
-import turtle from '../../../assets/pets/2_turtle.svg'
+import fish from '../../../assets/img/pets/1_fish.svg'
+import frog from '../../../assets/img/pets/3_frog.svg'
+import snake from '../../../assets/img/pets/4_snake.svg'
+import turtle from '../../../assets/img/pets/2_turtle.svg'
 import { BackButton, ContinueButton } from '@/components'
 import { AquariumServices } from '@/services/aquarium-services'
 import {
@@ -95,9 +95,16 @@ export const AquariumPets = () => {
   }
 
   const handleSubmit = React.useCallback(async () => {
+    const selectedPets = pets
+      .filter((pet) => pet.selected)
+      .map((pet) => ({
+        name: pet.name,
+        quantity: pet.quantity,
+      }))
+
     const data = {
       aquariumId: localStorageService.getAquariumId(),
-      sensors: { ...pets },
+      sensors: { ...selectedPets },
     }
 
     try {

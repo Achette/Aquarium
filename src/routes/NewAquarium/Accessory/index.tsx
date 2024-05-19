@@ -1,12 +1,12 @@
 import React from 'react'
 import { useMedia } from '@/hooks'
 import { BackButton, ContinueButton } from '@/components'
-import Light from '../../../assets/accessories/5_led.svg'
-import Feeder from '../../../assets/accessories/2_feeder.svg'
-import Filter from '../../../assets/accessories/4_filter.svg'
-import Plants from '../../../assets/accessories/6_accessories.svg'
-import WaterPump from '../../../assets/accessories/1_waterPump.svg'
-import Thermostat from '../../../assets/accessories/3_thermostat.svg'
+import Light from '../../../assets/img/accessories/5_led.svg'
+import Feeder from '../../../assets/img/accessories/2_feeder.svg'
+import Filter from '../../../assets/img/accessories/4_filter.svg'
+import Plants from '../../../assets/img/accessories/6_accessories.svg'
+import WaterPump from '../../../assets/img/accessories/1_waterPump.svg'
+import Thermostat from '../../../assets/img/accessories/3_thermostat.svg'
 import { Box, Flex, Heading, Image, Text, VStack } from '@chakra-ui/react'
 import * as localStorageService from '@/hooks'
 import { AquariumServices } from '@/services/aquarium-services'
@@ -69,18 +69,22 @@ export const AquariumAccessory = () => {
   }
 
   const handleSubmit = React.useCallback(async () => {
+    const selectedAccessories = accessories
+      .filter((accessory) => accessory.selected)
+      .map((accessory) => accessory.name)
+
     const data = {
       aquariumId: localStorageService.getAquariumId(),
-      accessories: { ...accessories },
+      accessories: { ...selectedAccessories },
     }
 
     try {
       await AquariumServices.newAccessories(data)
-      navigate("/new-aquarium/sensors")
+      navigate('/new-aquarium/sensors')
     } catch (e) {
       /* empty */
     }
-  }, [accessories])
+  }, [accessories, navigate])
 
   return (
     <Box px={isDesktop ? '16%' : '.25rem'} mt="1.5rem">
