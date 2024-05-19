@@ -1,10 +1,10 @@
 import { useMedia } from '@/hooks'
+import { useSelector } from 'react-redux'
 import { BuildSVG } from '@/utils/buildSVG'
 import { IoMdSettings } from 'react-icons/io'
 import { useNavigate } from 'react-router-dom'
 import { MdArrowBackIos } from 'react-icons/md'
 import { Flex, Icon, Image, Text } from '@chakra-ui/react'
-import { useSelector } from 'react-redux'
 import { getAquariumDetails } from '@/redux/reducers/aquariumDetails'
 
 export const AquariumDetailsTopBar = () => {

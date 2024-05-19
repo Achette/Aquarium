@@ -13,6 +13,7 @@ export const AquariumFormats = () => {
     format: '',
     icon: '',
   })
+  
   const [formats, setFormats] = React.useState<FormatProps[]>([
     {
       id: 1,
