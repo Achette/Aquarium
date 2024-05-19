@@ -64,3 +64,7 @@ export const saveAquariumId = (token: string) => {
 export const getAquariumId = (): string | null => {
   return localStorage.getItem(AQUARIUM_ID)
 }
+
+export const removeAquariumId = () => {
+  return localStorage.removeItem(AQUARIUM_ID)
+}
