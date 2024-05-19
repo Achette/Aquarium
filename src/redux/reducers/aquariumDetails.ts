@@ -7,6 +7,9 @@ interface Details {
   format: string
   material: string
   powerSupply: string
+  thickness: string
+  height: string
+  volume: string
   error: unknown
 }
 
@@ -15,6 +18,9 @@ const initialState: Details = {
   format: '',
   material: '',
   powerSupply: '',
+  thickness: '',
+  height: '',
+  volume: '',
   error: null,
 }
 
@@ -27,6 +33,7 @@ const aquariumDetailSlice = createSlice({
       state.format = ''
       state.material = ''
       state.powerSupply = ''
+      state.thickness = ''
       state.error = null
     },
   },
@@ -34,11 +41,22 @@ const aquariumDetailSlice = createSlice({
     builder.addCase(
       fetchAquariumDetails.fulfilled,
       (state, action: PayloadAction<Details>) => {
-        const { name, format, material, powerSupply } = action.payload
+        const {
+          name,
+          format,
+          material,
+          powerSupply,
+          thickness,
+          height,
+          volume,
+        } = action.payload
         state.format = format
         state.material = material
         state.name = name
         state.powerSupply = powerSupply
+        state.thickness = thickness
+        state.height = height
+        state.volume = volume
       }
     )
   },
