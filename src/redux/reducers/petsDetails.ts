@@ -48,11 +48,12 @@ const petSlice = createSlice({
     builder.addCase(
       fetchPetsByAquariumId.fulfilled,
       (state, action: PayloadAction<PetsDetails>) => {
-        state.pets[0].Peixe.quantity = action.payload.pets[0].Peixe.quantity
-        state.pets[0].Tartaruga.quantity =
-          action.payload.pets[0].Tartaruga.quantity
-        state.pets[0].Sapo.quantity = action.payload.pets[0].Sapo.quantity
-        state.pets[0].Cobra.quantity = action.payload.pets[0].Cobra.quantity
+        const {Peixe, Tartaruga, Sapo, Cobra} = action.payload.pets[0]
+        state.pets[0].Peixe.quantity = Peixe.quantity
+        state.pets[0].Tartaruga.quantity = Tartaruga.quantity
+        state.pets[0].Sapo.quantity = Sapo.quantity
+        state.pets[0].Cobra.quantity = Cobra.quantity
+        console.log('ACTION:::', action.payload)
       }
     )
   },

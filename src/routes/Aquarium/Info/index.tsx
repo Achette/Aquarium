@@ -14,6 +14,7 @@ import {
   getPetsByAquariumId,
 } from '@/redux/reducers/petsDetails'
 
+
 export const AquariumInfo = () => {
   const { isDesktop } = useMedia()
   const { id } = useParams()
