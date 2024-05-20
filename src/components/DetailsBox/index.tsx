@@ -16,9 +16,9 @@ type DetailBoxProps = {
   thickness: string
   height: string
   volume: string
-  fish: number,
-  turtle: number,
-  frog: number,
+  fish: number
+  turtle: number
+  frog: number
   snake: number
 }
 export const DetailsBox = ({
@@ -39,10 +39,10 @@ export const DetailsBox = ({
       {thickness && <BaseBox icon={iconThickness} data={thickness} />}
       {volume && <BaseBox icon={iconVolume} data={volume} />}
       {height && <BaseBox icon={iconHeight} data={height} />}
-      {fish && <BaseBox icon={iconFish} data={fish} />}
-      {turtle && <BaseBox icon={iconTurtle} data={turtle} />}
-      {frog && <BaseBox icon={iconFrog} data={frog} />}
-      {snake && <BaseBox icon={iconSnake} data={snake} />}
+      {fish !== 0 && <BaseBox icon={iconFish} data={fish} />}
+      {turtle !== 0 && <BaseBox icon={iconTurtle} data={turtle} />}
+      {frog !== 0 && <BaseBox icon={iconFrog} data={frog} />}
+      {snake !== 0 && <BaseBox icon={iconSnake} data={snake} />}
     </Flex>
   )
 }

@@ -74,7 +74,7 @@ export const AquariumAccessory = () => {
       .map((accessory) => accessory.name)
 
     const data = {
-      aquariumId: localStorageService.getAquariumId(),
+      id: localStorageService.getAquariumId(),
       accessories: [ ...selectedAccessories] ,
     }
 
