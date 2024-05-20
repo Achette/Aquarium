@@ -5,6 +5,10 @@ import iconFormat from '../../assets/icons/iconFormat.svg'
 import iconHeight from '../../assets/icons/iconHeight.svg'
 import iconVolume from '../../assets/icons/iconVolume.svg'
 import iconThickness from '../../assets/icons/iconThickness.svg'
+import iconFish from '../../assets/icons/iconFish.svg'
+import iconTurtle from '../../assets/icons/iconTurtle.svg'
+import iconFrog from '../../assets/icons/iconFrog.svg'
+import iconSnake from '../../assets/icons/iconSnake.svg'
 
 type DetailBoxProps = {
   material: string
@@ -12,6 +16,10 @@ type DetailBoxProps = {
   thickness: string
   height: string
   volume: string
+  fish: number,
+  turtle: number,
+  frog: number,
+  snake: number
 }
 export const DetailsBox = ({
   material,
@@ -19,6 +27,10 @@ export const DetailsBox = ({
   thickness,
   height,
   volume,
+  fish,
+  turtle,
+  frog,
+  snake,
 }: DetailBoxProps) => {
   return (
     <Flex flexWrap="wrap" h="auto" gap="1rem" mt="2rem" justifyContent="center">
@@ -27,6 +39,10 @@ export const DetailsBox = ({
       {thickness && <BaseBox icon={iconThickness} data={thickness} />}
       {volume && <BaseBox icon={iconVolume} data={volume} />}
       {height && <BaseBox icon={iconHeight} data={height} />}
+      {fish && <BaseBox icon={iconFish} data={fish} />}
+      {turtle && <BaseBox icon={iconTurtle} data={turtle} />}
+      {frog && <BaseBox icon={iconFrog} data={frog} />}
+      {snake && <BaseBox icon={iconSnake} data={snake} />}
     </Flex>
   )
 }
