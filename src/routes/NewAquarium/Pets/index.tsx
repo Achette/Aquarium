@@ -105,7 +105,7 @@ export const AquariumPets = () => {
       }, {})
 
     const data = {
-      aquariumId: localStorageService.getAquariumId(),
+      id: localStorageService.getAquariumId(),
       pets: [selectedPets],
     }
 
