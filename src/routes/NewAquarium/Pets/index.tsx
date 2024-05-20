@@ -102,7 +102,12 @@ export const AquariumPets = () => {
         // @ts-expect-error
         acc[pet.name] = { quantity: pet.quantity }
         return acc
-      }, {})
+      }, {
+        Peixe: { quantity: 0 },
+        Tartaruga: { quantity: 0 },
+        Sapo: { quantity: 0 },
+        Cobra: { quantity: 0 }
+      })
 
     const data = {
       id: localStorageService.getAquariumId(),
