@@ -9,6 +9,10 @@ import {
   fetchAquariumDetails,
   getAquariumDetails,
 } from '@/redux/reducers/aquariumDetails'
+import {
+  fetchPetsByAquariumId,
+  getPetsByAquariumId,
+} from '@/redux/reducers/petsDetails'
 
 export const AquariumInfo = () => {
   const { isDesktop } = useMedia()
@@ -17,6 +21,7 @@ export const AquariumInfo = () => {
 
   const fetchAquarium = React.useCallback(async () => {
     dispatch(fetchAquariumDetails(id!))
+    dispatch(fetchPetsByAquariumId(id!))
   }, [dispatch, id])
 
   React.useEffect(() => {
@@ -25,6 +30,9 @@ export const AquariumInfo = () => {
 
   const { material, powerSupply, thickness, height, volume } =
     useSelector(getAquariumDetails)
+
+  const { pets } = useSelector(getPetsByAquariumId)
+  const { Peixe, Tartaruga, Cobra, Sapo } = pets[0]
 
   return (
     <Box pt="1.5rem" px={isDesktop ? '16%' : '0.5rem'}>
@@ -35,6 +43,10 @@ export const AquariumInfo = () => {
         thickness={thickness}
         height={height}
         volume={volume}
+        fish={Peixe.quantity}
+        turtle={Tartaruga.quantity}
+        frog={Sapo.quantity}
+        snake={Cobra.quantity}
       />
     </Box>
   )
