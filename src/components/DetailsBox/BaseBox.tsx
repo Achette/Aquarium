@@ -2,7 +2,7 @@ import { Divider, Flex, Image, Text } from '@chakra-ui/react'
 
 type Props = {
   icon: string
-  data: string
+  data: string | number
 }
 export const BaseBox = ({ icon, data }: Props) => {
   return (
