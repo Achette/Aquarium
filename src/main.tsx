@@ -15,9 +15,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <AquariumProvider>
         <App />
       </AquariumProvider>
-      <AquariumProvider>
-        <App />
-      </AquariumProvider>
     </ChakraProvider>
     </Provider>
   </React.StrictMode>
