@@ -2,7 +2,12 @@
     TOKEN
 */
 
-import { TOKEN_KEY, USER_KEY, USER_KEY_ID } from '@/constants/system'
+import {
+  AQUARIUM_ID,
+  TOKEN_KEY,
+  USER_KEY,
+  USER_KEY_ID,
+} from '@/constants/system'
 
 export const saveToken = (token: string) => {
   localStorage.setItem(TOKEN_KEY, token)
@@ -46,4 +51,20 @@ export const getUser = (): string | null => {
 
 export const removeUser = () => {
   localStorage.removeItem(USER_KEY)
+}
+
+/*
+    AQUARIUM ID
+*/
+
+export const saveAquariumId = (token: string) => {
+  localStorage.setItem(AQUARIUM_ID, token)
+}
+
+export const getAquariumId = (): string | null => {
+  return localStorage.getItem(AQUARIUM_ID)
+}
+
+export const removeAquariumId = () => {
+  return localStorage.removeItem(AQUARIUM_ID)
 }

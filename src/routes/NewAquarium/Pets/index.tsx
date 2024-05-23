@@ -1,3 +1,14 @@
+import React from 'react'
+import { useMedia } from '@/hooks'
+import * as localStorageService from '@/hooks'
+import { useNavigate } from 'react-router-dom'
+import { FaMinus, FaPlus } from 'react-icons/fa6'
+import fish from '../../../assets/img/pets/1_fish.svg'
+import frog from '../../../assets/img/pets/3_frog.svg'
+import snake from '../../../assets/img/pets/4_snake.svg'
+import turtle from '../../../assets/img/pets/2_turtle.svg'
+import { BackButton, ContinueButton } from '@/components'
+import { AquariumServices } from '@/services/aquarium-services'
 import {
   Box,
   Flex,
@@ -8,17 +19,10 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import React from 'react'
-import fish from '../../../assets/pets/1_fish.svg'
-import turtle from '../../../assets/pets/2_turtle.svg'
-import frog from '../../../assets/pets/3_frog.svg'
-import snake from '../../../assets/pets/4_snake.svg'
-import { useMedia } from '@/hooks'
-import { BackButton, ContinueButton } from '@/components'
-import { FaMinus, FaPlus } from 'react-icons/fa6'
 
 export const AquariumPets = () => {
   const { isDesktop, isMobile } = useMedia()
+  const navigate = useNavigate()
 
   const [pets, setPets] = React.useState([
     {
@@ -90,6 +94,36 @@ export const AquariumPets = () => {
     })
   }
 
+  const handleSubmit = React.useCallback(async () => {
+    const selectedPets = pets
+      .filter((pet) => pet.selected)
+      .reduce((acc, pet) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        acc[pet.name] = { quantity: pet.quantity }
+        return acc
+      }, {
+        Peixe: { quantity: 0 },
+        Tartaruga: { quantity: 0 },
+        Sapo: { quantity: 0 },
+        Cobra: { quantity: 0 }
+      })
+
+    const data = {
+      id: localStorageService.getAquariumId(),
+      pets: [selectedPets],
+    }
+
+    try {
+      await AquariumServices.newPets(data)
+      navigate('/home')
+    } catch (e) {
+      /* empty */
+    } finally {
+      localStorageService.removeAquariumId()
+    }
+  }, [navigate, pets])
+
   return (
     <Box px={isDesktop ? '16%' : '.25rem'} mt="1.5rem">
       <Heading
@@ -155,7 +189,9 @@ export const AquariumPets = () => {
         justifyContent="center"
         mt="1.75rem"
       >
-        <ContinueButton data={pets} path="/home" />
+        <Box onClick={handleSubmit}>
+          <ContinueButton />
+        </Box>
         <BackButton />
       </Flex>
     </Box>

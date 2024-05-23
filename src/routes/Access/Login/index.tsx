@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom'
+import { saveUser, useMedia } from '@/hooks'
+import { Link, useNavigate } from 'react-router-dom'
 import { CiMail, CiUnlock } from 'react-icons/ci'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import {
@@ -11,10 +12,12 @@ import {
   InputLeftElement,
   Text,
   Link as LinkChakra,
+  useToast,
 } from '@chakra-ui/react'
+import { UserService } from '@/services/user-service'
 
 export type UserProps = {
-  email: string
+  username: string
   password: string
 }
 export const Login = () => {
@@ -24,8 +27,26 @@ export const Login = () => {
     formState: { errors },
   } = useForm<UserProps>()
 
-  const onSubmit: SubmitHandler<UserProps> = (data) => {
-    console.log(data)
+  const toast = useToast()
+  const navigate = useNavigate()
+  const { isMobileOrTablet } = useMedia()
+
+  const onSubmit: SubmitHandler<UserProps> = async (data) => {
+    try {
+      const response = await UserService.login(data)
+      saveUser(response.token)
+
+      toast({
+        description: `Bem vindo ${data.username}!`,
+        containerStyle: { color: 'white' },
+        position: isMobileOrTablet ? 'top' : 'bottom-right',
+        isClosable: true,
+      })
+
+      navigate('/home')
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
@@ -47,16 +68,17 @@ export const Login = () => {
           </InputLeftElement>
           <Input
             variant="flushed"
-            placeholder="E-mail"
+            placeholder="Usuário"
+            type="text"
             _placeholder={{ color: 'gray.100' }}
-            {...register('email', { required: true })}
+            {...register('username', { required: true })}
           />
         </InputGroup>
         <Text
           fontSize="0.75rem"
           color="pink.400"
           mt="0.2rem"
-          visibility={errors.email ? 'visible' : 'hidden'}
+          visibility={errors.username ? 'visible' : 'hidden'}
         >
           E-mail é obrigatório
         </Text>

@@ -1,24 +1,6 @@
 import { Button } from '@chakra-ui/react'
-import { useNavigate } from 'react-router-dom'
 
-type ButtonProps = {
-  data: {
-    id: number
-    name: string
-    img: string
-    selected: boolean
-    quantity?: number
-  }[]
-  path: string
-}
-
-export const ContinueButton = ({ data, path }: ButtonProps) => {
-  const navigate = useNavigate()
-
-  const handleClick = () => {
-    console.log(data)
-    navigate(path)
-  }
+export const ContinueButton = () => {
   return (
     <Button
       w="19.5rem"
@@ -28,7 +10,6 @@ export const ContinueButton = ({ data, path }: ButtonProps) => {
       bgColor="blue.900"
       _hover={{ bgColor: 'blue.500' }}
       fontSize="1rem"
-      onClick={() => handleClick()}
     >
       Avançar
     </Button>

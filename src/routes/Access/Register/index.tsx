@@ -18,11 +18,10 @@ import { UserService } from '@/services/user-service'
 import { useMedia } from '@/hooks'
 
 export type NewUserProps = {
-  
-  name: string
+  username: string
   email: string
   password: string
-  confirm_password: string
+  repeat_password: string
 }
 export const Register = () => {
   const {
@@ -36,6 +35,7 @@ export const Register = () => {
   const { isMobileOrTablet } = useMedia()
 
   const onSubmit: SubmitHandler<NewUserProps> = async (data) => {
+    console.log(data)
     try {
       await UserService.create(data)
 
@@ -64,7 +64,7 @@ export const Register = () => {
       </Box>
 
       <FormControl as="form" onSubmit={handleSubmit(onSubmit)} mt="1.5rem">
-        {/* Name */}
+        {/* Username */}
         <InputGroup>
           <InputLeftElement pointerEvents="none">
             <PiUserThin size="24px" />
@@ -73,14 +73,14 @@ export const Register = () => {
             variant="flushed"
             placeholder="Nome"
             _placeholder={{ color: 'gray.100' }}
-            {...register('name', { required: true })}
+            {...register('username', { required: true })}
           />
         </InputGroup>
         <Text
           fontSize="0.75rem"
           color="pink.400"
           mt="0.2rem"
-          visibility={errors.name ? 'visible' : 'hidden'}
+          visibility={errors.username ? 'visible' : 'hidden'}
         >
           Nome é obrigatório
         </Text>
@@ -138,14 +138,14 @@ export const Register = () => {
             type="password"
             placeholder="Confirme sua senha"
             _placeholder={{ color: 'gray.100' }}
-            {...register('confirm_password', { required: true })}
+            {...register('repeat_password', { required: true })}
           />
         </InputGroup>
         <Text
           fontSize="0.75rem"
           color="pink.400"
           mt="0.2rem"
-          visibility={errors.name ? 'visible' : 'hidden'}
+          visibility={errors.repeat_password ? 'visible' : 'hidden'}
         >
           Confirmar senha é obrigatório
         </Text>

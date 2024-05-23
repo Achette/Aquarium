@@ -19,13 +19,17 @@ import {
   Input,
   Text,
   VStack,
+  useToast,
 } from '@chakra-ui/react'
+import * as localStorageService from '@/hooks'
 
 export const NewAquarium = () => {
-  const { isMobile, isDesktop } = useMedia()
+  const toast = useToast()
   const navigate = useNavigate()
+  const { isMobile, isDesktop, isMobileOrTablet } = useMedia()
 
-  const { format, material, powerSupply } = useAquarium()
+  const { format, material, powerSupply, thickness, height, volume } =
+    useAquarium()
 
   const {
     register,
@@ -39,11 +43,25 @@ export const NewAquarium = () => {
       format,
       material,
       powerSupply,
+      thickness: thickness.toString().concat('mm'),
+      height: height.toString().concat('cm'),
+      volume: volume.toString().concat('L'),
     }
 
-    await AquariumServices.create(newAquarium)
+    const response = await AquariumServices.create(newAquarium)
+    const id = response.id
+    localStorageService.saveAquariumId(id)
+
+    toast({
+      description: `Aquário ${newAquarium.name} criado com sucesso!`,
+      containerStyle: { color: 'white' },
+      position: isMobileOrTablet ? 'top' : 'bottom-right',
+      isClosable: true,
+    })
+
     navigate('/new-aquarium/accessory')
   }
+
   return (
     <Box p="1.5rem 1rem 0" px={isDesktop ? '16%' : ''}>
       <Heading

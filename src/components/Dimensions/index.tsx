@@ -1,8 +1,11 @@
 import React from 'react'
 import { FaMinus, FaPlus } from 'react-icons/fa6'
 import { HStack, Icon, Text, VStack } from '@chakra-ui/react'
+import { useAquarium } from '@/context'
 
 export const AquariumDimensions = () => {
+  const { setThickness, setHeight, setVolume } = useAquarium()
+
   const [dimensions, setDimensions] = React.useState([
     {
       name: 'thickness',
@@ -44,6 +47,10 @@ export const AquariumDimensions = () => {
       return newDimensions
     })
   }
+
+  setThickness(dimensions[0].value)
+  setHeight(dimensions[1].value)
+  setVolume(dimensions[2].value)
 
   return (
     <VStack w="full" mt="1.5rem">
