@@ -14,7 +14,7 @@ import {
   Link as LinkChakra,
   useToast,
 } from '@chakra-ui/react'
-import { UserService } from '@/services/user-service'
+import { UserService } from '@/services/auth-service'
 import { useMedia } from '@/hooks'
 
 export type NewUserProps = {
