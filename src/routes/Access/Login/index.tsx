@@ -34,6 +34,7 @@ export const Login = () => {
   const onSubmit: SubmitHandler<UserProps> = async (data) => {
     try {
       const response = await UserService.login(data)
+
       const { token } = await response.data
       saveUser(token)
 

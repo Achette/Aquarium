@@ -1,5 +1,6 @@
 import React from 'react'
 import { useMedia } from '@/hooks'
+import { useNavigate } from 'react-router-dom'
 import { BackButton, ContinueButton } from '@/components'
 import Light from '../../../assets/img/accessories/5_led.svg'
 import Feeder from '../../../assets/img/accessories/2_feeder.svg'
@@ -8,9 +9,7 @@ import Plants from '../../../assets/img/accessories/6_accessories.svg'
 import WaterPump from '../../../assets/img/accessories/1_waterPump.svg'
 import Thermostat from '../../../assets/img/accessories/3_thermostat.svg'
 import { Box, Flex, Heading, Image, Text, VStack } from '@chakra-ui/react'
-import * as localStorageService from '@/hooks'
-import { AquariumServices } from '@/services/aquarium-services'
-import { useNavigate } from 'react-router-dom'
+import { addAcesories } from '@/services/accessories-services'
 
 export const AquariumAccessory = () => {
   const { isDesktop, isMobile } = useMedia()
@@ -37,19 +36,19 @@ export const AquariumAccessory = () => {
     },
     {
       id: 4,
-      name: 'Filtro ',
+      name: 'Filtro',
       img: Filter,
       selected: false,
     },
     {
       id: 5,
-      name: 'Luz LED ',
+      name: 'Luz LED',
       img: Light,
       selected: false,
     },
     {
       id: 6,
-      name: 'Plantas naturais ',
+      name: 'Plantas naturais',
       img: Plants,
       selected: false,
     },
@@ -73,16 +72,20 @@ export const AquariumAccessory = () => {
       .filter((accessory) => accessory.selected)
       .map((accessory) => accessory.name)
 
-    const data = {
-      id: localStorageService.getAquariumId(),
-      accessories: [ ...selectedAccessories] ,
-    }
+    /*    const data = {
+     // aquarium_id: localStorageService.getAquariumId(),
+      accessories:  [...selectedAccessories ],
+    } */
 
     try {
-      await AquariumServices.newAccessories(data)
-      navigate('/new-aquarium/sensors')
+     
+        await addAcesories({name: 'Bombinha'})
+      
+
+      // navigate('/new-aquarium/sensors')
+      console.log(selectedAccessories)
     } catch (e) {
-      /* empty */
+      console.error(e)
     }
   }, [accessories, navigate])
 

@@ -8,7 +8,7 @@ import frog from '../../../assets/img/pets/3_frog.svg'
 import snake from '../../../assets/img/pets/4_snake.svg'
 import turtle from '../../../assets/img/pets/2_turtle.svg'
 import { BackButton, ContinueButton } from '@/components'
-import { AquariumServices } from '@/services/aquarium-services'
+
 import {
   Box,
   Flex,
@@ -111,11 +111,12 @@ export const AquariumPets = () => {
 
     const data = {
       id: localStorageService.getAquariumId(),
-      pets: [selectedPets],
+      pets: selectedPets,
     }
 
     try {
-      await AquariumServices.newPets(data)
+      console.log(selectedPets)
+     // await AquariumServices.newPets(data)
       navigate('/home')
     } catch (e) {
       /* empty */

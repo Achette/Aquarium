@@ -14,7 +14,7 @@ export const AquariumPowerSupply = () => {
   const [power, setPower] = React.useState<PowerSupplyProps[]>([
     {
       id: 1,
-      volts: '127V',
+      volts: '110V',
       icon: BsFillLightningFill,
       active: true,
     },

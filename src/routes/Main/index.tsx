@@ -1,5 +1,5 @@
 import React from 'react'
-import { useMedia } from '@/hooks'
+import { getUser, useMedia } from '@/hooks'
 import { AquariumProps } from '@/models'
 import { BuildSVG } from '@/utils/buildSVG'
 import { AddButton, Header } from '@/components'
@@ -11,11 +11,13 @@ export const Main = () => {
   const [aquariums, setAquariums] = React.useState<AquariumProps[]>()
   const { isMobile } = useMedia()
   const navigate = useNavigate()
+  const [user, setUser] = React.useState<string | null>()
 
   const fetchAquariums = React.useCallback(async () => {
+    setUser(getUser())
     try {
-      const response = await AquariumServices.getAll()
-      setAquariums(response)
+      //const response = await AquariumServices.getAll()
+     // setAquariums(response)
     } catch (e) {
       console.log(e)
     }
@@ -24,7 +26,7 @@ export const Main = () => {
   React.useEffect(() => {
     fetchAquariums()
   }, [fetchAquariums])
-
+  console.log(user)
   return (
     <Box>
       <Header />
@@ -49,7 +51,7 @@ export const Main = () => {
                 onClick={() => navigate(`/aquarium/${aquarium.id}`)}
               >
                 <Image
-                  src={BuildSVG(aquarium.format)}
+                  src={BuildSVG(aquarium.format_aquarium)}
                   w={isMobile ? '2.5rem' : '3.75rem'}
                   h={isMobile ? '2.5rem' : '3.75rem'}
                 />

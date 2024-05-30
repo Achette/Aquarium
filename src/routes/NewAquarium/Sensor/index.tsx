@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import pH from '../../../assets/img/sensors/4_ph.svg'
 import { BackButton, ContinueButton } from '@/components'
 import oxygen from '../../../assets/img/sensors/2_oxigen.svg'
-import { AquariumServices } from '@/services/aquarium-services'
+//import { AquariumServices } from '@/services/aquarium-services'
 import luminosity from '../../../assets/img/sensors/1_luminosity.svg'
 import waterLevel from '../../../assets/img/sensors/3_water_level.svg'
 import { Box, Flex, Heading, Image, Text, VStack } from '@chakra-ui/react'
@@ -79,7 +79,7 @@ export const AquariumSensor = () => {
     }
 
     try {
-      await AquariumServices.newSensors(data)
+    //  await AquariumServices.newSensors(data)
       navigate('/new-aquarium/pets')
     } catch (e) {
       /* empty */
