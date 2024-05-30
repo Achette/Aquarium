@@ -34,12 +34,10 @@ export const Login = () => {
   const onSubmit: SubmitHandler<UserProps> = async (data) => {
     try {
       const response = await UserService.login(data)
-
-      const { token } = await response.data
-      saveUser(token)
+      saveUser(response.jwt)
 
       toast({
-        description: `Bem vindo ${data.username}!`,
+        description: `Bem vindo ${response.result.username}!`,
         containerStyle: { color: 'white' },
         position: isMobileOrTablet ? 'top' : 'bottom-right',
         isClosable: true,

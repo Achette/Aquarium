@@ -1,22 +1,22 @@
-import { AquariumProps } from '@/models'
-import axios, { AxiosRequestConfig } from 'axios'
-import { requestBackend } from './request'
-import { BASE_URL } from '@/constants/system'
+import axios from './axios';
+import { AquariumProps } from '@/models';
+import { BASE_URL } from '@/constants/system';
 
-export const createAquarium = async (data: Omit<AquariumProps , 'id'>) => {
-  const config: AxiosRequestConfig = {
-    method: 'POST',
-    url: '/aquarium',
-    data,
-    signal: AbortSignal.timeout(5000),
-  }
+export const createAquarium = async (data: Omit<AquariumProps, 'id'>) => {
+  // const config: AxiosRequestConfig = {
+  //   method: 'POST',
+  //   url: '/aquarium',
+  //   data,
+  //   signal: AbortSignal.timeout(5000),
+  // }
 
-  return requestBackend(config)
+  const response = await axios.post(`/aquarium`, data)
+  return response
 }
 
- export const AquariumServices = {
+export const AquariumServices = {
   create: async (data: Omit<AquariumProps, 'id'>): Promise<AquariumProps> => {
-    const response = await axios.post(`${BASE_URL}/aquarium`, data)
+    const response = await axios.post(`/aquarium`, data)
     return response.data
   },
 
