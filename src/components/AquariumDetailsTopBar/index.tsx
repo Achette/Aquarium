@@ -11,7 +11,7 @@ export const AquariumDetailsTopBar = () => {
   const { isDesktop } = useMedia()
   const navigate = useNavigate()
 
-  const { name, format } = useSelector(getAquariumDetails)
+  const { name, format_aquarium } = useSelector(getAquariumDetails)
 
   return (
     <Flex justifyContent="space-between" alignItems="center">
@@ -24,7 +24,10 @@ export const AquariumDetailsTopBar = () => {
         cursor="pointer"
       />
       <Flex gap="1rem">
-        <Image src={BuildSVG(format)} w={isDesktop ? '3.75rem' : '2.5rem'} />
+        <Image
+          src={BuildSVG(format_aquarium)}
+          w={isDesktop ? '3.75rem' : '2.5rem'}
+        />
         <Text
           w={isDesktop ? '25rem' : '10rem'}
           fontSize={isDesktop ? '2.5rem' : '1.5rem'}

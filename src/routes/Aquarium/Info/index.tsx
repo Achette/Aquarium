@@ -8,12 +8,12 @@ import { AquariumDetailsTopBar, DetailsBox } from '@/components'
 import {
   fetchAquariumDetails,
   getAquariumDetails,
+  resetAquarium,
 } from '@/redux/reducers/aquariumDetails'
 import {
   fetchPetsByAquariumId,
   getPetsByAquariumId,
 } from '@/redux/reducers/petsDetails'
-
 
 export const AquariumInfo = () => {
   const { isDesktop } = useMedia()
@@ -26,11 +26,11 @@ export const AquariumInfo = () => {
   }, [dispatch, id])
 
   React.useEffect(() => {
+    dispatch(resetAquarium())
     fetchAquarium()
-  }, [fetchAquarium])
+  }, [dispatch, fetchAquarium])
 
-  const { material, powerSupply, thickness, height, volume } =
-    useSelector(getAquariumDetails)
+  const details = useSelector(getAquariumDetails)
 
   const { pets } = useSelector(getPetsByAquariumId)
   const { Peixe, Tartaruga, Cobra, Sapo } = pets[0]
@@ -39,11 +39,11 @@ export const AquariumInfo = () => {
     <Box pt="1.5rem" px={isDesktop ? '16%' : '0.5rem'}>
       <AquariumDetailsTopBar />
       <DetailsBox
-        material={material}
-        powerSupply={powerSupply}
-        thickness={thickness}
-        height={height}
-        volume={volume}
+        material={details.material}
+        powerSupply={details.voltage}
+        thickness={details.thickness}
+        height={details.height}
+        volume={details.volume}
         fish={Peixe.quantity}
         turtle={Tartaruga.quantity}
         frog={Sapo.quantity}
