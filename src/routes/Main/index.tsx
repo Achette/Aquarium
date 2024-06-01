@@ -1,23 +1,21 @@
 import React from 'react'
-import { getUser, useMedia } from '@/hooks'
 import { AquariumProps } from '@/models'
 import { BuildSVG } from '@/utils/buildSVG'
-import { AddButton, Header } from '@/components'
-
-import { Box, HStack, Image, Text, VStack } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
+import { AddButton, Header } from '@/components'
+import { getAllAquariums } from '@/services/aquarium-services'
+import { Box, HStack, Image, Text, VStack } from '@chakra-ui/react'
+import { useMedia } from '@/hooks'
 
 export const Main = () => {
   const [aquariums, setAquariums] = React.useState<AquariumProps[]>()
   const { isMobile } = useMedia()
   const navigate = useNavigate()
-  const [user, setUser] = React.useState<string | null>()
 
   const fetchAquariums = React.useCallback(async () => {
-    setUser(getUser())
     try {
-      //const response = await AquariumServices.getAll()
-     // setAquariums(response)
+      const response = await getAllAquariums()
+      setAquariums(response)
     } catch (e) {
       console.log(e)
     }
@@ -26,7 +24,7 @@ export const Main = () => {
   React.useEffect(() => {
     fetchAquariums()
   }, [fetchAquariums])
-  console.log(user)
+
   return (
     <Box>
       <Header />
