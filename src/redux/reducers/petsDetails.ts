@@ -24,7 +24,7 @@ const petSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       fetchPetsByAquariumId.fulfilled,
-      (state, action: PayloadAction<Animal[]>) => {
+      (_, action: PayloadAction<Animal[]>) => {
         return action.payload
       }
     )
