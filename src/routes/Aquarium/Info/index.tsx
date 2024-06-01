@@ -29,11 +29,9 @@ export const AquariumInfo = () => {
     dispatch(resetAquarium())
     fetchAquarium()
   }, [dispatch, fetchAquarium])
-
   const details = useSelector(getAquariumDetails)
 
-  const { pets } = useSelector(getPetsByAquariumId)
-  const { Peixe, Tartaruga, Cobra, Sapo } = pets[0]
+  const pets = useSelector(getPetsByAquariumId)
 
   return (
     <Box pt="1.5rem" px={isDesktop ? '16%' : '0.5rem'}>
@@ -44,10 +42,7 @@ export const AquariumInfo = () => {
         thickness={details.thickness}
         height={details.height}
         volume={details.volume}
-        fish={Peixe.quantity}
-        turtle={Tartaruga.quantity}
-        frog={Sapo.quantity}
-        snake={Cobra.quantity}
+        pets={pets}
       />
     </Box>
   )
