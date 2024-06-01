@@ -1,12 +1,13 @@
 import { RootState } from '../store'
-import { AquariumServices } from '@/services/aquarium-services'
+import { getAquariumById } from '@/services/aquarium-services'
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+
 
 interface Details {
   name: string
-  format: string
+  format_aquarium: string
   material: string
-  powerSupply: string
+  voltage: string
   thickness: string
   height: string
   volume: string
@@ -15,9 +16,9 @@ interface Details {
 
 const initialState: Details = {
   name: '',
-  format: '',
+  format_aquarium: '',
   material: '',
-  powerSupply: '',
+  voltage: '',
   thickness: '',
   height: '',
   volume: '',
@@ -30,9 +31,9 @@ const aquariumDetailSlice = createSlice({
   reducers: {
     resetAquarium: (state) => {
       state.name = ''
-      state.format = ''
+      state.format_aquarium = ''
       state.material = ''
-      state.powerSupply = ''
+      state.voltage = ''
       state.thickness = ''
       state.error = null
     },
@@ -43,17 +44,17 @@ const aquariumDetailSlice = createSlice({
       (state, action: PayloadAction<Details>) => {
         const {
           name,
-          format,
+          format_aquarium,
           material,
-          powerSupply,
+          voltage,
           thickness,
           height,
           volume,
         } = action.payload
-        state.format = format
+        state.format_aquarium = format_aquarium
         state.material = material
         state.name = name
-        state.powerSupply = powerSupply
+        state.voltage = voltage
         state.thickness = thickness
         state.height = height
         state.volume = volume
@@ -65,8 +66,8 @@ const aquariumDetailSlice = createSlice({
 export const fetchAquariumDetails = createAsyncThunk(
   'fetch/aquarium-details',
   async (id: string) => {
-    const response = await AquariumServices.getById(id)
-    return response
+    const response = await getAquariumById(id)
+    return response.result
   }
 )
 
