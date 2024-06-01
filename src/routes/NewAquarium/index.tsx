@@ -49,7 +49,7 @@ export const NewAquarium = () => {
     }
 
     const response = await createAquarium(newAquarium)
-    const { id, name } = response.data.result
+    const { id, name } = response.result
     localStorageService.saveAquariumId(id)
 
     toast({

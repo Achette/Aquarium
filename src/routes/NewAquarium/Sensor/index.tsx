@@ -1,11 +1,10 @@
 import React from 'react'
 import { useMedia } from '@/hooks'
-import * as localStorageService from '@/hooks'
 import { useNavigate } from 'react-router-dom'
 import pH from '../../../assets/img/sensors/4_ph.svg'
+import { addSensors } from '@/services/sensors-services'
 import { BackButton, ContinueButton } from '@/components'
 import oxygen from '../../../assets/img/sensors/2_oxigen.svg'
-//import { AquariumServices } from '@/services/aquarium-services'
 import luminosity from '../../../assets/img/sensors/1_luminosity.svg'
 import waterLevel from '../../../assets/img/sensors/3_water_level.svg'
 import { Box, Flex, Heading, Image, Text, VStack } from '@chakra-ui/react'
@@ -43,13 +42,13 @@ export const AquariumSensor = () => {
     },
     {
       id: 5,
-      name: 'Temperatura externa',
+      name: 'Temperatura',
       img: outsideTemperature,
       selected: false,
     },
     {
       id: 6,
-      name: 'Temperatura interna',
+      name: 'Saturação',
       img: insideTemperature,
       selected: false,
     },
@@ -73,13 +72,14 @@ export const AquariumSensor = () => {
       .filter((sensor) => sensor.selected)
       .map((sensor) => sensor.name)
 
-    const data = {
-      aquariumId: localStorageService.getAquariumId(),
-      sensors:  [...selectedSensors] ,
-    }
+    const data = [...selectedSensors]
 
     try {
-    //  await AquariumServices.newSensors(data)
+      if (data.length) {
+        await Promise.all(
+          data.map(async (accessory) => await addSensors({ name: accessory }))
+        )
+      }
       navigate('/new-aquarium/pets')
     } catch (e) {
       /* empty */

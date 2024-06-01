@@ -3,7 +3,7 @@ import { getUser, useMedia } from '@/hooks'
 import { AquariumProps } from '@/models'
 import { BuildSVG } from '@/utils/buildSVG'
 import { AddButton, Header } from '@/components'
-import { AquariumServices } from '@/services/aquarium-services'
+
 import { Box, HStack, Image, Text, VStack } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 

@@ -3,6 +3,7 @@ import { useMedia } from '@/hooks'
 import * as localStorageService from '@/hooks'
 import { useNavigate } from 'react-router-dom'
 import { FaMinus, FaPlus } from 'react-icons/fa6'
+import { addPets } from '@/services/pets-services'
 import fish from '../../../assets/img/pets/1_fish.svg'
 import frog from '../../../assets/img/pets/3_frog.svg'
 import snake from '../../../assets/img/pets/4_snake.svg'
@@ -96,27 +97,22 @@ export const AquariumPets = () => {
 
   const handleSubmit = React.useCallback(async () => {
     const selectedPets = pets
-      .filter((pet) => pet.selected)
-      .reduce((acc, pet) => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
-        acc[pet.name] = { quantity: pet.quantity }
-        return acc
-      }, {
-        Peixe: { quantity: 0 },
-        Tartaruga: { quantity: 0 },
-        Sapo: { quantity: 0 },
-        Cobra: { quantity: 0 }
-      })
-
-    const data = {
-      id: localStorageService.getAquariumId(),
-      pets: selectedPets,
-    }
+      .filter((pet) => pet.selected && pet.quantity > 0)
+      .map((pet) => ({
+        species: pet.name,
+        quantity: pet.quantity,
+      }))
 
     try {
-      console.log(selectedPets)
-     // await AquariumServices.newPets(data)
+      if (selectedPets.length) {
+        await Promise.all(
+          selectedPets.map(
+            async (pet) =>
+              await addPets({ species: pet.species, quantity: pet.quantity })
+          )
+        )
+      }
+
       navigate('/home')
     } catch (e) {
       /* empty */
