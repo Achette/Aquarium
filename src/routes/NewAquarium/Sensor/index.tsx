@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import pH from '../../../assets/img/sensors/4_ph.svg'
 import { addSensors } from '@/services/sensors-services'
 import { BackButton, ContinueButton } from '@/components'
-import oxygen from '../../../assets/img/sensors/2_oxigen.svg'
 import luminosity from '../../../assets/img/sensors/1_luminosity.svg'
 import waterLevel from '../../../assets/img/sensors/3_water_level.svg'
 import { Box, Flex, Heading, Image, Text, VStack } from '@chakra-ui/react'
@@ -24,30 +23,24 @@ export const AquariumSensor = () => {
     },
     {
       id: 2,
-      name: 'Oxígênio',
-      img: oxygen,
-      selected: false,
-    },
-    {
-      id: 3,
       name: 'Nível de água',
       img: waterLevel,
       selected: false,
     },
     {
-      id: 4,
+      id: 3,
       name: 'pH',
       img: pH,
       selected: false,
     },
     {
-      id: 5,
+      id: 4,
       name: 'Temperatura',
       img: outsideTemperature,
       selected: false,
     },
     {
-      id: 6,
+      id: 5,
       name: 'Saturação',
       img: insideTemperature,
       selected: false,
