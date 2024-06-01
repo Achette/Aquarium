@@ -9,7 +9,6 @@ import frog from '../../../assets/img/pets/3_frog.svg'
 import snake from '../../../assets/img/pets/4_snake.svg'
 import turtle from '../../../assets/img/pets/2_turtle.svg'
 import { BackButton, ContinueButton } from '@/components'
-
 import {
   Box,
   Flex,
