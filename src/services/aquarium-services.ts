@@ -16,9 +16,4 @@ export const getAquariumById = async (id: string) => {
   return response.data
 }
 
-export const AquariumServices = {
-  create: async (data: Omit<AquariumProps, 'id'>): Promise<AquariumProps> => {
-    const response = await axios.post(`/aquarium`, data)
-    return response.data
-  },
-}
+
