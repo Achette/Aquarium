@@ -14,7 +14,7 @@ import {
   Link as LinkChakra,
   useToast,
 } from '@chakra-ui/react'
-import { UserService } from '@/services/user-service'
+import { UserService } from '@/services/auth-service'
 
 export type UserProps = {
   username: string
@@ -34,10 +34,10 @@ export const Login = () => {
   const onSubmit: SubmitHandler<UserProps> = async (data) => {
     try {
       const response = await UserService.login(data)
-      saveUser(response.token)
+      saveUser(response.jwt)
 
       toast({
-        description: `Bem vindo ${data.username}!`,
+        description: `Bem vindo ${response.result.username}!`,
         containerStyle: { color: 'white' },
         position: isMobileOrTablet ? 'top' : 'bottom-right',
         isClosable: true,

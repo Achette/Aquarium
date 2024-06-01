@@ -1,10 +1,11 @@
 import { useMedia } from '@/hooks'
 import { useAquarium } from '@/context'
 import { NewAquariumProps } from '@/models'
+import * as localStorageService from '@/hooks'
 import { useNavigate } from 'react-router-dom'
 import { AquariumFormats } from '@/components/Formats'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { AquariumServices } from '@/services/aquarium-services'
+import { createAquarium } from '@/services/aquarium-services'
 import {
   AquariumDimensions,
   AquariumMaterial,
@@ -21,7 +22,6 @@ import {
   VStack,
   useToast,
 } from '@chakra-ui/react'
-import * as localStorageService from '@/hooks'
 
 export const NewAquarium = () => {
   const toast = useToast()
@@ -40,20 +40,20 @@ export const NewAquarium = () => {
   const onSubmit: SubmitHandler<NewAquariumProps> = async (data) => {
     const newAquarium = {
       name: data.name,
-      format,
+      format_aquarium: format,
       material,
-      powerSupply,
+      voltage: powerSupply,
       thickness: thickness.toString().concat('mm'),
       height: height.toString().concat('cm'),
-      volume: volume.toString().concat('L'),
+      capacity: volume.toString().concat('L'),
     }
 
-    const response = await AquariumServices.create(newAquarium)
-    const id = response.id
+    const response = await createAquarium(newAquarium)
+    const { id, name } = response.result
     localStorageService.saveAquariumId(id)
 
     toast({
-      description: `Aquário ${newAquarium.name} criado com sucesso!`,
+      description: `Aquário ${name} criado com sucesso!`,
       containerStyle: { color: 'white' },
       position: isMobileOrTablet ? 'top' : 'bottom-right',
       isClosable: true,
