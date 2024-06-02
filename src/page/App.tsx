@@ -11,6 +11,7 @@ import {
   AquariumPets,
   AquariumDash,
   AquariumInfo,
+  AquariumControl,
 } from '@/routes'
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
 
           <Route path={`/aquarium/:id`} element={<AquariumDash />}>
             <Route index element={<AquariumInfo />} />
+            <Route path={`/aquarium/:id/controls`} element={<AquariumControl />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -35,6 +35,8 @@ const aquariumDetailSlice = createSlice({
       state.material = ''
       state.voltage = ''
       state.thickness = ''
+      state.height = ''
+      state.volume = ''
       state.error = null
     },
   },

@@ -16,6 +16,10 @@ import {
   resetPets,
 } from '@/redux/reducers/petsDetails'
 import { SensorDetails } from '@/components/SensorDetails'
+import {
+  fetchAccessoriesAquarium,
+  resetAccessories,
+} from '@/redux/reducers/accessoriesDetails'
 
 export const AquariumInfo = () => {
   const { isDesktop } = useMedia()
@@ -25,11 +29,13 @@ export const AquariumInfo = () => {
   const fetchAquarium = React.useCallback(async () => {
     dispatch(fetchAquariumDetails(id!))
     dispatch(fetchPetsByAquariumId(id!))
+    dispatch(fetchAccessoriesAquarium(id!))
   }, [dispatch, id])
 
   React.useEffect(() => {
     dispatch(resetPets())
     dispatch(resetAquarium())
+    dispatch(resetAccessories())
     fetchAquarium()
   }, [dispatch, fetchAquarium])
 

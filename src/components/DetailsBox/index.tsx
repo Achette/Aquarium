@@ -1,21 +1,13 @@
 import { BaseBox } from './BaseBox'
 import { Flex } from '@chakra-ui/react'
-import iconVolt from '../../assets/icons/iconVolt.svg'
-import iconFormat from '../../assets/icons/iconFormat.svg'
-import iconHeight from '../../assets/icons/iconHeight.svg'
-import iconVolume from '../../assets/icons/iconVolume.svg'
-import iconThickness from '../../assets/icons/iconThickness.svg'
+import iconVolt from '@/assets/icons/iconVolt.svg'
+import iconFormat from '@/assets/icons/iconFormat.svg'
+import iconHeight from '@/assets/icons/iconHeight.svg'
+import iconVolume from '@/assets/icons/iconVolume.svg'
+import iconThickness from '@/assets/icons/iconThickness.svg'
 
-import { Animal } from '@/models'
+import { DetailBoxProps } from '@/models'
 
-type DetailBoxProps = {
-  material: string
-  powerSupply: string
-  thickness: string
-  height: string
-  volume: string
-  pets: Animal[]
-}
 export const DetailsBox = ({
   material,
   powerSupply,
@@ -31,15 +23,18 @@ export const DetailsBox = ({
       {thickness && <BaseBox icon={iconThickness} data={thickness} />}
       {volume && <BaseBox icon={iconVolume} data={volume} />}
       {height && <BaseBox icon={iconHeight} data={height} />}
-      {pets.length !== 0 &&
-        pets.map((pet) => (
-          <BaseBox
-            key={pet.species}
-            icon={pet.species}
-            data={pet.quantity}
-            isPet
-          />
-        ))}
+      {pets.length > 0 &&
+        pets.map(
+          (pet) =>
+            pet.quantity > 0 && (
+              <BaseBox
+                key={pet.species}
+                icon={pet.species}
+                data={pet.quantity}
+                isPet
+              />
+            )
+        )}
     </Flex>
   )
 }
