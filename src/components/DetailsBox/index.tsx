@@ -26,14 +26,19 @@ export const DetailsBox = ({
 }: DetailBoxProps) => {
   return (
     <Flex flexWrap="wrap" h="auto" gap="1rem" mt="2rem" justifyContent="center">
-      <BaseBox icon={iconFormat} data={material} />
-      <BaseBox icon={iconVolt} data={powerSupply} />
+      {material && <BaseBox icon={iconFormat} data={material} />}
+      {powerSupply && <BaseBox icon={iconVolt} data={powerSupply} />}
       {thickness && <BaseBox icon={iconThickness} data={thickness} />}
       {volume && <BaseBox icon={iconVolume} data={volume} />}
       {height && <BaseBox icon={iconHeight} data={height} />}
       {pets.length !== 0 &&
         pets.map((pet) => (
-          <BaseBox icon={pet.species} data={pet.quantity} isPet />
+          <BaseBox
+            key={pet.species}
+            icon={pet.species}
+            data={pet.quantity}
+            isPet
+          />
         ))}
     </Flex>
   )
