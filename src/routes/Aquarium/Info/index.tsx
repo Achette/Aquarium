@@ -43,7 +43,7 @@ export const AquariumInfo = () => {
   const pets = useSelector(getPetsByAquariumId)
 
   return (
-    <Box pt="1.5rem" px={isDesktop ? '16%' : '0.5rem'}>
+    <Box  pt="1.5rem" px={isDesktop ? '16%' : '0.5rem'}>
       <AquariumDetailsTopBar />
       <DetailsBox
         material={details.material}
