@@ -5,9 +5,9 @@ type NewSensorsProps = {
   name: string
 }
 
-const aquariumId = getAquariumId()
 
 export const addSensors = async (data: NewSensorsProps) => {
+  const aquariumId = getAquariumId()
   const response = await axios.post(`/aquarium/${aquariumId}/sensors`, data)
   return response
 }

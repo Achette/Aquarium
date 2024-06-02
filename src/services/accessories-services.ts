@@ -5,9 +5,9 @@ type NewAccessoriesProps = {
   name: string
 }
 
-const aquariumId = getAquariumId()
 
 export const addAccesories = async (data: NewAccessoriesProps) => {
+  const aquariumId = getAquariumId()
   const response = await axios.post(`/aquarium/${aquariumId}/accessories`, data)
   return response
 }
