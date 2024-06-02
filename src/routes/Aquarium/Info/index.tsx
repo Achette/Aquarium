@@ -13,7 +13,9 @@ import {
 import {
   fetchPetsByAquariumId,
   getPetsByAquariumId,
+  resetPets,
 } from '@/redux/reducers/petsDetails'
+import { SensorDetails } from '@/components/SensorDetails'
 
 export const AquariumInfo = () => {
   const { isDesktop } = useMedia()
@@ -26,15 +28,16 @@ export const AquariumInfo = () => {
   }, [dispatch, id])
 
   React.useEffect(() => {
+    dispatch(resetPets())
     dispatch(resetAquarium())
     fetchAquarium()
   }, [dispatch, fetchAquarium])
-  const details = useSelector(getAquariumDetails)
 
+  const details = useSelector(getAquariumDetails)
   const pets = useSelector(getPetsByAquariumId)
 
   return (
-    <Box pt="1.5rem" px={isDesktop ? '16%' : '0.5rem'}>
+    <Box  pt="1.5rem" px={isDesktop ? '16%' : '0.5rem'}>
       <AquariumDetailsTopBar />
       <DetailsBox
         material={details.material}
@@ -44,6 +47,7 @@ export const AquariumInfo = () => {
         volume={details.volume}
         pets={pets}
       />
+      <SensorDetails />
     </Box>
   )
 }
