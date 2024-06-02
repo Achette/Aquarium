@@ -1,13 +1,13 @@
 import { HStack } from '@chakra-ui/react'
 import { SensorInfoBox } from './SensorInfoBox'
 
-import iconTemp from '../../assets/icons/iconTemp.svg'
-import iconSat from '../../assets/icons/iconSat.svg'
-import iconPH from '../../assets/icons/iconPh.svg'
-import iconLevel from '../../assets/icons/iconWaterLevel.svg'
-import iconLimini from '../../assets/icons/iconLumini.svg'
-import iconClear from '../../assets/icons/iconClean.svg'
-import iconFeed from '../../assets/icons/iconFeed.svg'
+import iconTemp from '@/assets/icons/iconTemp.svg'
+import iconSat from '@/assets/icons/iconSat.svg'
+import iconPH from '@/assets/icons/iconPh.svg'
+import iconLevel from '@/assets/icons/iconWaterLevel.svg'
+import iconLimini from '@/assets/icons/iconLumini.svg'
+import iconClear from '@/assets/icons/iconClean.svg'
+import iconFeed from '@/assets/icons/iconFeed.svg'
 
 export const SensorDetails = () => {
   return (
@@ -15,7 +15,7 @@ export const SensorDetails = () => {
       flexWrap="wrap"
       h="auto"
       gap="1rem"
-      mt="2rem"
+      mt="3rem"
       justifyContent="center"
     >
       <SensorInfoBox icon={iconTemp} description="Temperatura" info="27 C" />

@@ -42,3 +42,12 @@ export interface Animal {
   created_at: string
   updated_at: string
 }
+
+export type DetailBoxProps = {
+  material: string
+  powerSupply: string
+  thickness: string
+  height: string
+  volume: string
+  pets: Animal[]
+}

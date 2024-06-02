@@ -7,20 +7,21 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useParams } from 'react-router-dom'
 import { VscGraphLine } from 'react-icons/vsc'
 import { HiOutlineHome } from 'react-icons/hi2'
 import { BsSliders } from 'react-icons/bs'
 
 export const AquariumDash = () => {
-  const { isMobile, isMobileOrTablet } = useMedia()
+  const { isMobileOrTablet } = useMedia()
+  const { id } = useParams()
 
   return (
     <Box w="full" h="100vh">
       <Outlet />
       <Flex
         w="full"
-        h={isMobile ? '4.25rem' : '6.5rem'}
+        h={isMobileOrTablet ? '4.25rem' : '6.5rem'}
         borderTop="1px solid #0157A3"
         position="fixed"
         bottom="0"
@@ -37,8 +38,8 @@ export const AquariumDash = () => {
             <VStack>
               <Icon
                 as={VscGraphLine}
-                w={isMobile ? '2rem' : '2.5rem'}
-                h={isMobile ? '2rem' : '2.5rem'}
+                w={isMobileOrTablet ? '2rem' : '2.5rem'}
+                h={isMobileOrTablet ? '2rem' : '2.5rem'}
                 color="blue.900"
               />
               <Text fontSize=".75rem" color="blue.900" fontWeight={300}>
@@ -47,12 +48,16 @@ export const AquariumDash = () => {
             </VStack>
           </LinkChakra>
 
-          <LinkChakra as={Link} _hover={{ textDecoration: 'none' }}>
+          <LinkChakra
+            as={Link}
+            to={`/aquarium/${id}`}
+            _hover={{ textDecoration: 'none' }}
+          >
             <VStack>
               <Icon
                 as={HiOutlineHome}
-                w={isMobile ? '2rem' : '2.5rem'}
-                h={isMobile ? '2rem' : '2.5rem'}
+                w={isMobileOrTablet ? '2rem' : '2.5rem'}
+                h={isMobileOrTablet ? '2rem' : '2.5rem'}
                 color="blue.900"
               />
               <Text fontSize=".75rem" color="blue.900" fontWeight={300}>
@@ -61,12 +66,16 @@ export const AquariumDash = () => {
             </VStack>
           </LinkChakra>
 
-          <LinkChakra as={Link} _hover={{ textDecoration: 'none' }}>
+          <LinkChakra
+            as={Link}
+            to={`/aquarium/${id}/controls`}
+            _hover={{ textDecoration: 'none' }}
+          >
             <VStack>
               <Icon
                 as={BsSliders}
-                w={isMobile ? '2rem' : '2.5rem'}
-                h={isMobile ? '2rem' : '2.5rem'}
+                w={isMobileOrTablet ? '2rem' : '2.5rem'}
+                h={isMobileOrTablet ? '2rem' : '2.5rem'}
                 color="blue.900"
               />
               <Text fontSize=".75rem" color="blue.900" fontWeight={300}>

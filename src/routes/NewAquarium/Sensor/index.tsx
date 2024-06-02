@@ -1,14 +1,14 @@
 import React from 'react'
 import { useMedia } from '@/hooks'
 import { useNavigate } from 'react-router-dom'
-import pH from '../../../assets/img/sensors/4_ph.svg'
+import pH from '@/assets/img/sensors/4_ph.svg'
 import { addSensors } from '@/services/sensors-services'
 import { BackButton, ContinueButton } from '@/components'
-import luminosity from '../../../assets/img/sensors/1_luminosity.svg'
-import waterLevel from '../../../assets/img/sensors/3_water_level.svg'
+import luminosity from '@/assets/img/sensors/1_luminosity.svg'
+import waterLevel from '@/assets/img/sensors/3_water_level.svg'
 import { Box, Flex, Heading, Image, Text, VStack } from '@chakra-ui/react'
-import insideTemperature from '../../../assets/img/sensors/6_inside_temperature.svg'
-import outsideTemperature from '../../../assets/img/sensors/5_outside_temperature.svg'
+import insideTemperature from '@/assets/img/sensors/6_inside_temperature.svg'
+import outsideTemperature from '@/assets/img/sensors/5_outside_temperature.svg'
 
 export const AquariumSensor = () => {
   const { isDesktop, isMobile } = useMedia()
