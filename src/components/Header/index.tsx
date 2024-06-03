@@ -30,12 +30,7 @@ export const Header = () => {
             size="sm"
             cursor="pointer"
           />
-          <Divider
-            h="32px
-        "
-            orientation="vertical"
-            color="blue.400"
-          />
+          <Divider h="32px" orientation="vertical" color="blue.400" />
           <Icon
             as={PiPowerFill}
             w="32px"
