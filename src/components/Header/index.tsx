@@ -2,11 +2,13 @@ import { LogoSm } from '../LogoSm'
 import { PiPowerFill } from 'react-icons/pi'
 import { useNavigate } from 'react-router-dom'
 import { Avatar, HStack, Icon, Divider, Flex } from '@chakra-ui/react'
+import { removeUser } from '@/hooks'
 
 export const Header = () => {
   const navigate = useNavigate()
 
   const handleLogout = () => {
+    removeUser()
     navigate('/')
   }
 
