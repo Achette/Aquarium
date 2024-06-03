@@ -34,6 +34,7 @@ export const Login = () => {
   const onSubmit: SubmitHandler<UserProps> = async (data) => {
     try {
       const response = await UserService.login(data)
+      if (!response.jwt) throw new Error(response.message)
       saveUser(response.jwt)
 
       toast({
@@ -44,8 +45,14 @@ export const Login = () => {
       })
 
       navigate('/home')
-    } catch (e) {
-      console.log(e)
+    } catch (e: unknown) {
+      toast({
+        description: 'Usuário ou senha incorretos',
+        status: 'error',
+        containerStyle: { color: 'white' },
+        position: isMobileOrTablet ? 'top' : 'bottom-right',
+        isClosable: true,
+      })
     }
   }
 
