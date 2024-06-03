@@ -21,7 +21,7 @@ export const Main = () => {
   const fetchAquariums = React.useCallback(async () => {
     try {
       const response = await getAllAquariums()
-      setAquariums(response)
+      setAquariums(response.data)
     } catch (e) {
       console.log(e)
     }
