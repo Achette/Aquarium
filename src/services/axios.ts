@@ -1,12 +1,13 @@
 import axios from 'axios'
-import { BASE_URL, USER_KEY } from '@/constants/system'
+import { BASE_URL } from '@/constants/system'
+import { getUser } from '@/hooks'
 
 // Set config defaults when creating the instance
 const instance = axios.create({
   baseURL: BASE_URL,
 })
 
-instance.defaults.headers.common['Authorization'] = localStorage.getItem(USER_KEY)
+instance.defaults.headers.common['Authorization'] = getUser()
 
 // Add a request interceptor
 instance.interceptors.request.use(
