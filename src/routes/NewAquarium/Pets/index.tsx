@@ -78,7 +78,7 @@ export const AquariumPets = () => {
           selectedPets.map(async (pet) => {
             await addPets({ species: pet.species, quantity: pet.quantity })
             toast({
-              description: `${pet} adicionado ao aquário`,
+              description: `${pet.quantity} ${pet.species}(s) adicionado(s) ao aquário`,
               containerStyle: { color: 'white' },
               position: isMobileOrTablet ? 'top' : 'bottom-right',
               isClosable: true,
