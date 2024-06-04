@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios'
-
 import { AquariumProps } from '@/models'
 import { requestBackend } from './request'
+
 
 export const createAquarium = async (data: Omit<AquariumProps, 'id'>) => {
   const config: AxiosRequestConfig = {
