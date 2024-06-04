@@ -80,9 +80,9 @@ export const AquariumPets = () => {
             toast({
               description: `${pet.quantity} ${pet.species}(s) adicionado(s) ao aquário`,
               containerStyle: { color: 'white' },
-              position: isMobileOrTablet ? 'top' : 'bottom-right',
+              position: isMobileOrTablet ? 'bottom' : 'bottom-right',
               isClosable: true,
-              duration: 2500,
+              duration: 2000,
             })
           })
         )
@@ -167,10 +167,10 @@ export const AquariumPets = () => {
         justifyContent="center"
         mt="1.75rem"
       >
+        <BackButton />
         <Box onClick={handleSubmit}>
           <ContinueButton />
         </Box>
-        <BackButton />
       </Flex>
     </Box>
   )

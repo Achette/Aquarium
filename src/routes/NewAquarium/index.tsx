@@ -103,6 +103,18 @@ export const NewAquarium = () => {
             mt="1.75rem"
           >
             <Button
+              w="19.5rem"
+              h="3rem"
+              colorScheme="blue"
+              variant="outline"
+              borderRadius="3.75rem"
+              fontSize="1rem"
+              onClick={() => navigate(-1)}
+            >
+              Voltar
+            </Button>
+
+            <Button
               type="submit"
               w="19.5rem"
               h="3rem"
@@ -113,18 +125,6 @@ export const NewAquarium = () => {
               fontSize="1rem"
             >
               Avançar
-            </Button>
-
-            <Button
-              w="19.5rem"
-              h="3rem"
-              colorScheme="blue"
-              variant="outline"
-              borderRadius="3.75rem"
-              fontSize="1rem"
-              onClick={() => navigate(-1)}
-            >
-              Voltar
             </Button>
           </Flex>
         </FormControl>
