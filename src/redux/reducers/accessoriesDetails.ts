@@ -40,7 +40,7 @@ export const fetchAccessoriesAquarium = createAsyncThunk(
   'fetch/ accessories-details',
   async (id: string) => {
     const response = await getAllAccessories(id)
-    return response
+    return response.data
   }
 )
 

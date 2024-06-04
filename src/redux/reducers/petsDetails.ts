@@ -35,7 +35,7 @@ export const fetchPetsByAquariumId = createAsyncThunk(
   'fetch/pets-details',
   async (id: string) => {
     const response = await getAllPets(id)
-    return response
+    return response.data
   }
 )
 

@@ -69,7 +69,7 @@ export const fetchAquariumDetails = createAsyncThunk(
   'fetch/aquarium-details',
   async (id: string) => {
     const response = await getAquariumById(id)
-    return response.result
+    return response.data.result
   }
 )
 

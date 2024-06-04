@@ -1,5 +1,6 @@
-import axios from './axios'
+import { AxiosRequestConfig } from 'axios'
 import { getAquariumId } from '@/hooks'
+import { requestBackend } from './request'
 
 type NewAccessoriesProps = {
   name: string
@@ -7,11 +8,20 @@ type NewAccessoriesProps = {
 
 export const addAccesories = async (data: NewAccessoriesProps) => {
   const aquariumId = getAquariumId()
-  const response = await axios.post(`/aquarium/${aquariumId}/accessories`, data)
-  return response
+  const config: AxiosRequestConfig = {
+    method: 'POST',
+    url: `/aquarium/${aquariumId}/accessories`,
+    data,
+  }
+
+  return requestBackend(config)
 }
 
 export const getAllAccessories = async (id: string) => {
-  const response = await axios.get(`/aquarium/${id}/accessories`)
-  return response.data
+  const config: AxiosRequestConfig = {
+    method: 'GET',
+    url: `/aquarium/${id}/accessories`,
+  }
+
+  return requestBackend(config)
 }
