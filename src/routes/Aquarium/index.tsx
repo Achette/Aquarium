@@ -1,4 +1,11 @@
+import React from 'react'
 import { useMedia } from '@/hooks'
+import { useDispatch } from 'react-redux'
+import { BsSliders } from 'react-icons/bs'
+import { AppDispatch } from '@/redux/store'
+import { VscGraphLine } from 'react-icons/vsc'
+import { HiOutlineHome } from 'react-icons/hi2'
+import { Link, Outlet, useParams } from 'react-router-dom'
 import {
   Box,
   Flex,
@@ -7,14 +14,34 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react'
-import { Link, Outlet, useParams } from 'react-router-dom'
-import { VscGraphLine } from 'react-icons/vsc'
-import { HiOutlineHome } from 'react-icons/hi2'
-import { BsSliders } from 'react-icons/bs'
+import {
+  fetchAquariumDetails,
+  resetAquarium,
+} from '@/redux/reducers/aquariumDetails'
+import { fetchPetsByAquariumId, resetPets } from '@/redux/reducers/petsDetails'
+import {
+  fetchAccessoriesAquarium,
+  resetAccessories,
+} from '@/redux/reducers/accessoriesDetails'
 
 export const AquariumDash = () => {
   const { isMobileOrTablet } = useMedia()
   const { id } = useParams()
+
+  const dispatch = useDispatch<AppDispatch>()
+
+  const fetchAquarium = React.useCallback(async () => {
+    dispatch(fetchAquariumDetails(id!))
+    dispatch(fetchPetsByAquariumId(id!))
+    dispatch(fetchAccessoriesAquarium(id!))
+  }, [dispatch, id])
+
+  React.useEffect(() => {
+    dispatch(resetPets())
+    dispatch(resetAquarium())
+    dispatch(resetAccessories())
+    fetchAquarium()
+  }, [dispatch, fetchAquarium])
 
   return (
     <Box w="full" h="100vh">

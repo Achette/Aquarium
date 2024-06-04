@@ -1,7 +1,10 @@
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { CiMail, CiUnlock } from 'react-icons/ci'
+import { useMedia } from '@/hooks'
+import { NewUserProps } from '@/models'
 import { PiUserThin } from 'react-icons/pi'
+import { CiMail, CiUnlock } from 'react-icons/ci'
 import { Link, useNavigate } from 'react-router-dom'
+import { UserService } from '@/services/auth-service'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import {
   Box,
   Button,
@@ -14,15 +17,7 @@ import {
   Link as LinkChakra,
   useToast,
 } from '@chakra-ui/react'
-import { UserService } from '@/services/auth-service'
-import { useMedia } from '@/hooks'
 
-export type NewUserProps = {
-  username: string
-  email: string
-  password: string
-  repeat_password: string
-}
 export const Register = () => {
   const {
     register,
@@ -48,7 +43,13 @@ export const Register = () => {
 
       navigate('/account')
     } catch (e) {
-      console.log(e)
+      toast({
+        description: 'Não foi possível criar sua conta! Tente novamente.',
+        status: 'error',
+        containerStyle: { color: 'white' },
+        position: isMobileOrTablet ? 'top' : 'bottom-right',
+        isClosable: true,
+      })
     }
   }
 

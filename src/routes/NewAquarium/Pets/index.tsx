@@ -4,10 +4,7 @@ import * as localStorageService from '@/hooks'
 import { useNavigate } from 'react-router-dom'
 import { FaMinus, FaPlus } from 'react-icons/fa6'
 import { addPets } from '@/services/pets-services'
-import fish from '@/assets/img/pets/1_fish.svg'
-import frog from '@/assets/img/pets/3_frog.svg'
-import snake from '@/assets/img/pets/4_snake.svg'
-import turtle from '@/assets/img/pets/2_turtle.svg'
+import { aquariumPets } from '@/assets/helpers/pets'
 import { BackButton, ContinueButton } from '@/components'
 import {
   Box,
@@ -18,42 +15,15 @@ import {
   Image,
   Text,
   VStack,
+  useToast,
 } from '@chakra-ui/react'
 
 export const AquariumPets = () => {
-  const { isDesktop, isMobile } = useMedia()
+  const toast = useToast()
   const navigate = useNavigate()
+  const { isDesktop, isMobile, isMobileOrTablet } = useMedia()
 
-  const [pets, setPets] = React.useState([
-    {
-      id: 1,
-      name: 'Peixe',
-      img: fish,
-      selected: false,
-      quantity: 0,
-    },
-    {
-      id: 2,
-      name: 'Tartaruga',
-      img: turtle,
-      selected: false,
-      quantity: 0,
-    },
-    {
-      id: 3,
-      name: 'Sapo',
-      img: frog,
-      selected: false,
-      quantity: 0,
-    },
-    {
-      id: 4,
-      name: 'Cobra',
-      img: snake,
-      selected: false,
-      quantity: 0,
-    },
-  ])
+  const [pets, setPets] = React.useState(aquariumPets)
 
   const handleSelectPets = (index: number) => {
     setPets((prevPets) => {
@@ -105,20 +75,32 @@ export const AquariumPets = () => {
     try {
       if (selectedPets.length) {
         await Promise.all(
-          selectedPets.map(
-            async (pet) =>
-              await addPets({ species: pet.species, quantity: pet.quantity })
-          )
+          selectedPets.map(async (pet) => {
+            await addPets({ species: pet.species, quantity: pet.quantity })
+            toast({
+              description: `${pet} adicionado ao aquário`,
+              containerStyle: { color: 'white' },
+              position: isMobileOrTablet ? 'top' : 'bottom-right',
+              isClosable: true,
+              duration: 2500,
+            })
+          })
         )
       }
 
       navigate('/home')
     } catch (e) {
-      /* empty */
+      toast({
+        description: 'Não foi possível adicionar os pets ao aquário',
+        status: 'error',
+        containerStyle: { color: 'white' },
+        position: isMobileOrTablet ? 'top' : 'bottom-right',
+        isClosable: true,
+      })
     } finally {
       localStorageService.removeAquariumId()
     }
-  }, [navigate, pets])
+  }, [isMobileOrTablet, navigate, pets, toast])
 
   return (
     <Box px={isDesktop ? '16%' : '.25rem'} mt="1.5rem">

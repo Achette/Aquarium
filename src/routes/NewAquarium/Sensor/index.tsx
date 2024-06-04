@@ -1,51 +1,25 @@
 import React from 'react'
 import { useMedia } from '@/hooks'
 import { useNavigate } from 'react-router-dom'
-import pH from '@/assets/img/sensors/4_ph.svg'
 import { addSensors } from '@/services/sensors-services'
 import { BackButton, ContinueButton } from '@/components'
-import luminosity from '@/assets/img/sensors/1_luminosity.svg'
-import waterLevel from '@/assets/img/sensors/3_water_level.svg'
-import { Box, Flex, Heading, Image, Text, VStack } from '@chakra-ui/react'
-import insideTemperature from '@/assets/img/sensors/6_inside_temperature.svg'
-import outsideTemperature from '@/assets/img/sensors/5_outside_temperature.svg'
+import { aquariumSensors } from '@/assets/helpers/sensors'
+import {
+  Box,
+  Flex,
+  Heading,
+  Image,
+  Text,
+  VStack,
+  useToast,
+} from '@chakra-ui/react'
 
 export const AquariumSensor = () => {
-  const { isDesktop, isMobile } = useMedia()
+  const { isDesktop, isMobile, isMobileOrTablet } = useMedia()
   const navigate = useNavigate()
+  const toast = useToast()
 
-  const [sensors, setSensors] = React.useState([
-    {
-      id: 1,
-      name: 'Luminosidade',
-      img: luminosity,
-      selected: false,
-    },
-    {
-      id: 2,
-      name: 'Nível de água',
-      img: waterLevel,
-      selected: false,
-    },
-    {
-      id: 3,
-      name: 'pH',
-      img: pH,
-      selected: false,
-    },
-    {
-      id: 4,
-      name: 'Temperatura',
-      img: outsideTemperature,
-      selected: false,
-    },
-    {
-      id: 5,
-      name: 'Saturação',
-      img: insideTemperature,
-      selected: false,
-    },
-  ])
+  const [sensors, setSensors] = React.useState(aquariumSensors)
 
   const handleSelectSensors = (index: number) => {
     setSensors((prevSensors) => {
@@ -70,14 +44,29 @@ export const AquariumSensor = () => {
     try {
       if (data.length) {
         await Promise.all(
-          data.map(async (accessory) => await addSensors({ name: accessory }))
+          data.map(async (sensor) => {
+            await addSensors({ name: sensor })
+            toast({
+              description: `${sensor} adicionado ao aquário`,
+              containerStyle: { color: 'white' },
+              position: isMobileOrTablet ? 'top' : 'bottom-right',
+              isClosable: true,
+              duration: 2500,
+            })
+          })
         )
       }
       navigate('/new-aquarium/pets')
     } catch (e) {
-      /* empty */
+      toast({
+        description: 'Não foi possível adicionar os sensores ao aquário',
+        status: 'error',
+        containerStyle: { color: 'white' },
+        position: isMobileOrTablet ? 'top' : 'bottom-right',
+        isClosable: true,
+      })
     }
-  }, [navigate, sensors])
+  }, [isMobileOrTablet, navigate, sensors, toast])
 
   return (
     <Box px={isDesktop ? '16%' : '.25rem'} mt="1.5rem">

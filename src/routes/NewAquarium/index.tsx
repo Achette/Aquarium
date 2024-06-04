@@ -1,8 +1,7 @@
-import { useMedia } from '@/hooks'
 import { useAquarium } from '@/context'
 import { NewAquariumProps } from '@/models'
-import * as localStorageService from '@/hooks'
 import { useNavigate } from 'react-router-dom'
+import { saveAquariumId, useMedia } from '@/hooks'
 import { AquariumFormats } from '@/components/Formats'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { createAquarium } from '@/services/aquarium-services'
@@ -49,8 +48,8 @@ export const NewAquarium = () => {
     }
 
     const response = await createAquarium(newAquarium)
-    const { id, name } = response.result
-    localStorageService.saveAquariumId(id)
+    const { id, name } = response.data.result
+    saveAquariumId(id)
 
     toast({
       description: `Aquário ${name} criado com sucesso!`,

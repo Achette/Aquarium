@@ -1,5 +1,17 @@
 import { IconType } from 'react-icons'
 
+export type NewUserProps = {
+  username: string
+  email: string
+  password: string
+  repeat_password: string
+}
+
+export type UserProps = {
+  username: string
+  password: string
+}
+
 export type NewAquariumProps = {
   name: string
 }
