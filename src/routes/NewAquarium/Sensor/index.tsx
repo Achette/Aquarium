@@ -49,9 +49,9 @@ export const AquariumSensor = () => {
             toast({
               description: `${sensor} adicionado ao aquário`,
               containerStyle: { color: 'white' },
-              position: isMobileOrTablet ? 'top' : 'bottom-right',
+              position: isMobileOrTablet ? 'bottom' : 'bottom-right',
               isClosable: true,
-              duration: 2500,
+              duration: 2000,
             })
           })
         )
@@ -112,10 +112,10 @@ export const AquariumSensor = () => {
         justifyContent="center"
         mt="1.75rem"
       >
+        <BackButton />
         <Box onClick={handleSubmit}>
           <ContinueButton />
         </Box>
-        <BackButton />
       </Flex>
     </Box>
   )
