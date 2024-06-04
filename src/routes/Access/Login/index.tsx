@@ -1,6 +1,8 @@
+import { CiUnlock } from 'react-icons/ci'
+import { PiUserThin } from 'react-icons/pi'
 import { saveUser, useMedia } from '@/hooks'
 import { Link, useNavigate } from 'react-router-dom'
-import { CiMail, CiUnlock } from 'react-icons/ci'
+import { UserService } from '@/services/auth-service'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import {
   Box,
@@ -14,7 +16,6 @@ import {
   Link as LinkChakra,
   useToast,
 } from '@chakra-ui/react'
-import { UserService } from '@/services/auth-service'
 
 export type UserProps = {
   username: string
@@ -71,7 +72,7 @@ export const Login = () => {
         {/* E-mail */}
         <InputGroup>
           <InputLeftElement pointerEvents="none">
-            <CiMail size="24px" />
+            <PiUserThin size="24px" />
           </InputLeftElement>
           <Input
             variant="flushed"
