@@ -1,3 +1,4 @@
+import { UserProps } from '@/models'
 import { CiUnlock } from 'react-icons/ci'
 import { PiUserThin } from 'react-icons/pi'
 import { saveUser, useMedia } from '@/hooks'
@@ -17,10 +18,6 @@ import {
   useToast,
 } from '@chakra-ui/react'
 
-export type UserProps = {
-  username: string
-  password: string
-}
 export const Login = () => {
   const {
     register,

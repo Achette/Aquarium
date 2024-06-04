@@ -1,7 +1,6 @@
 import axios from 'axios'
-import { UserProps } from '@/routes'
 import { BASE_URL } from '@/constants/system'
-import { NewUserProps } from '@/routes/Access/Register'
+import { NewUserProps, UserProps } from '@/models'
 
 export const UserService = {
   create: async (data: NewUserProps) => {

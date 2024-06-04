@@ -1,58 +1,25 @@
 import React from 'react'
 import { useMedia } from '@/hooks'
 import { useNavigate } from 'react-router-dom'
-import Light from '@/assets/img/accessories/5_led.svg'
 import { BackButton, ContinueButton } from '@/components'
-import Plants from '@/assets/img/accessories/6_plant.svg'
-import Feeder from '@/assets/img/accessories/2_feeder.svg'
-import Filter from '@/assets/img/accessories/4_filter.svg'
 import { addAccesories } from '@/services/accessories-services'
-import WaterPump from '@/assets/img/accessories/1_waterPump.svg'
-import Thermostat from '@/assets/img/accessories/3_thermostat.svg'
-import { Box, Flex, Heading, Image, Text, VStack } from '@chakra-ui/react'
+import { aquariumAccessories } from '@/assets/helpers/accessories'
+import {
+  Box,
+  Flex,
+  Heading,
+  Image,
+  Text,
+  VStack,
+  useToast,
+} from '@chakra-ui/react'
 
 export const AquariumAccessory = () => {
-  const { isDesktop, isMobile } = useMedia()
+  const toast = useToast()
   const navigate = useNavigate()
+  const { isDesktop, isMobile, isMobileOrTablet } = useMedia()
 
-  const [accessories, setAccessories] = React.useState([
-    {
-      id: 1,
-      name: 'Bombinha',
-      img: WaterPump,
-      selected: false,
-    },
-    {
-      id: 2,
-      name: 'Alimentador automático',
-      img: Feeder,
-      selected: false,
-    },
-    {
-      id: 3,
-      name: 'Termostato / Aquecedor',
-      img: Thermostat,
-      selected: false,
-    },
-    {
-      id: 4,
-      name: 'Filtro',
-      img: Filter,
-      selected: false,
-    },
-    {
-      id: 5,
-      name: 'Luz LED',
-      img: Light,
-      selected: false,
-    },
-    {
-      id: 6,
-      name: 'Plantas naturais',
-      img: Plants,
-      selected: false,
-    },
-  ])
+  const [accessories, setAccessories] = React.useState(aquariumAccessories)
 
   const handleSelectAccessory = (index: number) => {
     setAccessories((prevAccessories) => {
@@ -77,17 +44,30 @@ export const AquariumAccessory = () => {
     try {
       if (data.length) {
         await Promise.all(
-          data.map(
-            async (accessory) => await addAccesories({ name: accessory })
-          )
+          data.map(async (accessory) => {
+            await addAccesories({ name: accessory })
+            toast({
+              description: `${accessory} adicionado ao aquário`,
+              containerStyle: { color: 'white' },
+              position: isMobileOrTablet ? 'top' : 'bottom-right',
+              isClosable: true,
+              duration: 2500,
+            })
+          })
         )
       }
 
       navigate('/new-aquarium/sensors')
     } catch (e) {
-      console.error(e)
+      toast({
+        description: 'Não foi possível adicionar os acessórios ao aquário',
+        status: 'error',
+        containerStyle: { color: 'white' },
+        position: isMobileOrTablet ? 'top' : 'bottom-right',
+        isClosable: true,
+      })
     }
-  }, [accessories, navigate])
+  }, [accessories, isMobileOrTablet, navigate, toast])
 
   return (
     <Box px={isDesktop ? '16%' : '.25rem'} mt="1.5rem">
