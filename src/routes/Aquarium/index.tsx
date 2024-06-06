@@ -44,8 +44,9 @@ export const AquariumDash = () => {
   }, [dispatch, fetchAquarium])
 
   return (
-    <Box w="full" h="100vh">
+    <Box w="full" h="auto">
       <Outlet />
+
       <Flex
         w="full"
         h={isMobileOrTablet ? '4.25rem' : '6.5rem'}
@@ -61,7 +62,11 @@ export const AquariumDash = () => {
           justifyContent="space-between"
           alignItems="center"
         >
-          <LinkChakra as={Link} _hover={{ textDecoration: 'none' }}>
+          <LinkChakra
+            as={Link}
+            to={`/aquarium/${id}/dashboards`}
+            _hover={{ textDecoration: 'none' }}
+          >
             <VStack>
               <Icon
                 as={VscGraphLine}

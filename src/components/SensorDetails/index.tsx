@@ -1,21 +1,28 @@
+import { useMedia } from '@/hooks'
 import { HStack } from '@chakra-ui/react'
-import { SensorInfoBox } from './SensorInfoBox'
-
-import iconTemp from '@/assets/icons/iconTemp.svg'
-import iconSat from '@/assets/icons/iconSat.svg'
 import iconPH from '@/assets/icons/iconPh.svg'
-import iconLevel from '@/assets/icons/iconWaterLevel.svg'
-import iconLimini from '@/assets/icons/iconLumini.svg'
-import iconClear from '@/assets/icons/iconClean.svg'
+import { SensorInfoBox } from './SensorInfoBox'
+import iconSat from '@/assets/icons/iconSat.svg'
+import iconTemp from '@/assets/icons/iconTemp.svg'
 import iconFeed from '@/assets/icons/iconFeed.svg'
+import iconClear from '@/assets/icons/iconClean.svg'
+import iconLumini from '@/assets/icons/iconLumini.svg'
+import iconLevel from '@/assets/icons/iconWaterLevel.svg'
 
-export const SensorDetails = () => {
+type SensorDetailsProps = {
+  cleanDate: string
+  feedDate: string
+}
+
+export const SensorDetails = ({ cleanDate, feedDate }: SensorDetailsProps) => {
+  const { isMobile } = useMedia()
+
   return (
     <HStack
       flexWrap="wrap"
       h="auto"
       gap="1rem"
-      mt="3rem"
+      pt={`${isMobile}` ? '1.5rem' : '3rem'}
       justifyContent="center"
     >
       <SensorInfoBox icon={iconTemp} description="Temperatura" info="27 C" />
@@ -27,19 +34,19 @@ export const SensorDetails = () => {
         info="17,5 ml"
       />
       <SensorInfoBox
-        icon={iconLimini}
+        icon={iconLumini}
         description="Luminosidade"
         info="35 lm"
       />
       <SensorInfoBox
         icon={iconClear}
         description="Última Limpeza"
-        info="16/04/2024"
+        info={cleanDate}
       />
       <SensorInfoBox
         icon={iconFeed}
         description="Última Alimentação"
-        info="23/04/2024 | 12:00"
+        info={feedDate}
       />
     </HStack>
   )
