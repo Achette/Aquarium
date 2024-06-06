@@ -1,9 +1,13 @@
+/* eslint-disable */
+// @ts-nocheck
+import { dados } from '../assets/helpers/dados.ts'
+
 export function Compute(form) {
   let N = 0
   let SUM = 0.0
   let Std = 0.0
   let SKStd = 0.0
- // let KUStd = 0.0
+  // let KUStd = 0.0
   const theList = []
   let Mediana = 0.0
   let theQ1 = 0.0
@@ -38,7 +42,7 @@ export function Compute(form) {
         Std += Math.pow(value - x, 2)
         MAD += Math.abs(value - x)
         SKStd += Math.pow(value - x, 3)
-     //   KUStd += Math.pow(value - x, 4)
+        //   KUStd += Math.pow(value - x, 4)
       }
     }
 
@@ -79,15 +83,31 @@ export function Compute(form) {
     const SK2 = SK1 / b3
     const Distorcao = Math.round(10000000 * SK2) / 10000000
 
+    // **Cálculo da Assimetria**
+    const Assimetria = (function skewness(data) {
+      const meanValue =
+        data.reduce((sum, value) => sum + value, 0) / data.length
+      const stdDev = Math.sqrt(
+        data.reduce((sum, value) => sum + Math.pow(value - meanValue, 2), 0) /
+          (data.length - 1)
+      )
+      const n = data.length
+      const skew =
+        (data.reduce((sum, value) => sum + Math.pow(value - meanValue, 3), 0) *
+          n) /
+        ((n - 1) * (n - 2) * Math.pow(stdDev, 3))
+      return skew
+    })(form)
+
     // Calcula a Curtose ErroPadrao Media
-    const curtose = (function kurtosis(arr) {
+    const Curtose = (function kurtosis(arr) {
       if (!Array.isArray(arr)) {
         throw new TypeError(
           'Curtose inválida. Necessário um array de ao menos 4 elementos'
         )
       }
 
-      let len = arr.length
+      const len = arr.length
       let delta = 0
       let delta_n = 0
       let delta_n2 = 0
@@ -168,7 +188,7 @@ export function Compute(form) {
       DesvioPadrao,
       CoeficienteVariacao,
       Distorcao,
-      curtose,
+      Curtose,
       ErroPadraoMedia,
       Mediana,
       moda,
@@ -181,6 +201,12 @@ export function Compute(form) {
       InterQuartilico,
       DesvioQuartilico,
       DesvioAbsolutoMedia,
+      Assimetria,
+      Soma: SUM,
     }
   }
 }
+
+const lumini = dados.map((data) => data.luminosidade)
+
+console.log(Compute(lumini))
