@@ -26,7 +26,8 @@ export const Main = () => {
       <VStack h="calc(100vh - 4rem)" alignItems="center" mt="2rem">
         {aquariums &&
           aquariums.map((aquarium) => (
-            <AquariumList key={aquarium.id}
+            <AquariumList
+              key={aquarium.id}
               id={aquarium.id}
               name={aquarium.name}
               format={aquarium.format_aquarium}
