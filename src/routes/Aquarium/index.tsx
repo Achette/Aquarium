@@ -24,6 +24,7 @@ import {
   fetchAccessoriesAquarium,
   resetAccessories,
 } from '@/redux/reducers/accessoriesDetails'
+import { fetchDataForGraphs, resetSensorValues } from '@/redux/reducers/graphSlice'
 
 export const AquariumDash = () => {
   const { id } = useParams()
@@ -36,6 +37,7 @@ export const AquariumDash = () => {
     dispatch(fetchPetsByAquariumId(id!))
     dispatch(fetchAccessoriesAquarium(id!))
     dispatch(fetchAllSensors(id!))
+    dispatch(fetchDataForGraphs(id!))
   }, [dispatch, id])
 
   React.useEffect(() => {
@@ -43,6 +45,7 @@ export const AquariumDash = () => {
     dispatch(resetAquarium())
     dispatch(resetAccessories())
     dispatch(resetSensors())
+    dispatch(resetSensorValues())
     fetchAquarium()
   }, [dispatch, fetchAquarium])
 

@@ -1,4 +1,5 @@
-import { dados } from '../../assets/helpers/dados'
+import { useMedia } from '@/hooks'
+import { ChartDataProps } from '@/models'
 import {
   ComposedChart,
   Line,
@@ -12,18 +13,18 @@ import {
   ResponsiveContainer,
   Scatter,
 } from 'recharts'
-import { Compute } from '@/utils/estatistica'
 
-export default function ComposedChartWithAxisLabels() {
-  const lumini = dados.map((data) => data.luminosidade)
+export default function ComposedChartWithAxisLabels({
+  dataGraph,
+}: ChartDataProps) {
+  const { isMobileOrTablet } = useMedia()
 
-  console.log(Compute(lumini))
   return (
-    <ResponsiveContainer width={'100%'} height="90%">
+    <ResponsiveContainer width={isMobileOrTablet ? '100%' : '50%'} height="55%">
       <ComposedChart
         width={500}
         height={400}
-        data={dados}
+        data={dataGraph}
         margin={{
           top: 20,
           right: 80,
@@ -33,7 +34,7 @@ export default function ComposedChartWithAxisLabels() {
       >
         <CartesianGrid stroke="#f5f5f5" />
         <XAxis
-          dataKey="data_hora"
+          dataKey="created_at"
           label={{
             value: 'Dia/Hora',
             position: 'insideBottomRight',
@@ -41,21 +42,27 @@ export default function ComposedChartWithAxisLabels() {
           }}
           scale="band"
         />
-        <YAxis
-          label={{ value: 'Luminosidade', angle: -90, position: 'insideLeft' }}
-        />
+        <YAxis label={{ value: '', angle: -90, position: 'insideLeft' }} />
         <Tooltip />
         <Legend />
-        <Area
-          type="monotone"
-          dataKey="oxigenio_aqua"
-          fill="#8884d8"
-          stroke="#8884d8"
-        />
-        <Bar dataKey="temperatura_aquario" barSize={20} fill="#413ea0" />
-        <Line type="monotone" dataKey="temperatura_ambiente" stroke="#ff78FF" />
-        <Line type="monotone" dataKey="luminosidade" stroke="#ff7300" />
-        <Scatter dataKey="ph" fill="red" />
+        {dataGraph[0].nivel_agua && (
+          <Area
+            type="monotone"
+            dataKey="nivel_agua"
+            fill="#8884d8"
+            stroke="#8884d8"
+          />
+        )}
+        {dataGraph[0].temperatura && (
+          <Bar dataKey="temperatura" barSize={20} fill="#413ea0" />
+        )}
+        {dataGraph[0].luminosidade && (
+          <Line type="monotone" dataKey="luminosidade" stroke="#ff78FF" />
+        )}
+        {dataGraph[0].nivel_oxigenio && (
+          <Line type="monotone" dataKey="nivel_oxigenio" stroke="#ff7300" />
+        )}
+        {dataGraph[0].ph && <Scatter dataKey="ph" fill="red" />}
       </ComposedChart>
     </ResponsiveContainer>
   )
