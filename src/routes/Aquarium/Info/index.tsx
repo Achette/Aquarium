@@ -24,6 +24,8 @@ export const AquariumInfo = () => {
   const details = useSelector(getAquariumDetails)
   const pets = useSelector(getPetsByAquariumId)
 
+
+
   return (
     <VStack
       pt="1.5rem"

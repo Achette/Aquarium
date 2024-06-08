@@ -6,6 +6,7 @@ import { AppDispatch } from '@/redux/store'
 import { VscGraphLine } from 'react-icons/vsc'
 import { HiOutlineHome } from 'react-icons/hi2'
 import { Link, Outlet, useParams } from 'react-router-dom'
+import { fetchAllSensors, resetSensors } from '@/redux/reducers/sensorsDetails'
 import {
   Box,
   Flex,
@@ -25,8 +26,8 @@ import {
 } from '@/redux/reducers/accessoriesDetails'
 
 export const AquariumDash = () => {
-  const { isMobileOrTablet } = useMedia()
   const { id } = useParams()
+  const { isMobileOrTablet } = useMedia()
 
   const dispatch = useDispatch<AppDispatch>()
 
@@ -34,12 +35,14 @@ export const AquariumDash = () => {
     dispatch(fetchAquariumDetails(id!))
     dispatch(fetchPetsByAquariumId(id!))
     dispatch(fetchAccessoriesAquarium(id!))
+    dispatch(fetchAllSensors(id!))
   }, [dispatch, id])
 
   React.useEffect(() => {
     dispatch(resetPets())
     dispatch(resetAquarium())
     dispatch(resetAccessories())
+    dispatch(resetSensors())
     fetchAquarium()
   }, [dispatch, fetchAquarium])
 

@@ -18,6 +18,7 @@ import {
   Heading,
   Input,
   Text,
+  
   VStack,
   useToast,
 } from '@chakra-ui/react'
@@ -42,9 +43,9 @@ export const NewAquarium = () => {
       format_aquarium: format,
       material,
       voltage: powerSupply,
-      thickness: thickness.toString().concat('mm'),
-      height: height.toString().concat('cm'),
-      capacity: volume.toString().concat('L'),
+      thickness: thickness.toString(),
+      height: height.toString(),
+      capacity: volume.toString(),
     }
 
     const response = await createAquarium(newAquarium)

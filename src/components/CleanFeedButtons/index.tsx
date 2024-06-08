@@ -1,15 +1,17 @@
 import { useMedia } from '@/hooks'
 import iconFood from '@/assets/icons/iconFood.svg'
 import iconClear from '@/assets/icons/iconClear.svg'
-import { Flex, HStack, Image, Text, VStack, useToast } from '@chakra-ui/react'
-
 import { getActualDate, formatCurrentDateTime } from '@/utils/buildDate'
+import { Flex, HStack, Image, Text, VStack, useToast } from '@chakra-ui/react'
 
 type CleanAndFeedButtonsProps = {
   getCleanDate: (arg: string) => void
   getFeedDate: (arg: string) => void
 }
-export const CleanAndFeedButtons = ({ getCleanDate, getFeedDate }: CleanAndFeedButtonsProps) => {
+export const CleanAndFeedButtons = ({
+  getCleanDate,
+  getFeedDate,
+}: CleanAndFeedButtonsProps) => {
   const { isMobileOrTablet, isMobile } = useMedia()
   const toast = useToast()
 
