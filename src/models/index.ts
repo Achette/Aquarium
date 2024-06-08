@@ -63,3 +63,23 @@ export type DetailBoxProps = {
   volume: string
   pets: Animal[]
 }
+
+export interface GraphsProps {
+  created_at: string
+  luminosidade: string
+  nivel_agua: string
+  nivel_oxigenio: string
+  ph: string
+  temperatura: string
+}
+
+export type ChartDataProps = {
+  dataGraph: {
+    created_at: string
+    luminosidade: string
+    nivel_agua: string
+    nivel_oxigenio: string
+    ph: string
+    temperatura: string
+  }[]
+}

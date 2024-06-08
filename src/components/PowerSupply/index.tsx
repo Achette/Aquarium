@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAquarium } from '@/context'
 import { PowerSupplyProps } from '@/models'
-import { BsFillLightningFill } from 'react-icons/bs'
+import { powerSuppy } from '@/assets/helpers/powerSupply'
 import { HStack, Heading, Icon, Text, VStack } from '@chakra-ui/react'
 
 export const AquariumPowerSupply = () => {
@@ -11,20 +11,7 @@ export const AquariumPowerSupply = () => {
     icon: undefined,
     active: false,
   })
-  const [power, setPower] = React.useState<PowerSupplyProps[]>([
-    {
-      id: 1,
-      volts: '110V',
-      icon: BsFillLightningFill,
-      active: true,
-    },
-    {
-      id: 2,
-      volts: '220V',
-      icon: BsFillLightningFill,
-      active: false,
-    },
-  ])
+  const [power, setPower] = React.useState<PowerSupplyProps[]>(powerSuppy)
 
   const { setPowerSupply } = useAquarium()
 
@@ -73,7 +60,7 @@ export const AquariumPowerSupply = () => {
             >
               <Icon as={pow.icon} color="blue.900" opacity="60%" />
               <Text fontSize="0.75rem" color="blue.900" opacity="60%">
-                {pow.volts}
+                {pow.volts}V
               </Text>
             </HStack>
           </HStack>

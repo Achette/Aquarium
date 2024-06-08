@@ -7,5 +7,5 @@ export const requestBackend = (config: AxiosRequestConfig) => {
     authorization: getUser(),
   }
 
-  return axios({ ...config, baseURL: BASE_URL, headers })
+  return axios({ ...config, baseURL: BASE_URL, headers, timeout: 5000 })
 }

@@ -16,3 +16,21 @@ export const addSensors = async (data: NewSensorsProps) => {
 
   return requestBackend(config)
 }
+
+export const getAllSensor = async (id: string) => {
+  const config: AxiosRequestConfig = {
+    method: 'GET',
+    url: `/aquarium/${id}/sensors`,
+  }
+
+  return requestBackend(config)
+}
+
+export const getAllOldSensor = async (id: string) => {
+  const config: AxiosRequestConfig = {
+    method: 'GET',
+    url: `/aquarium/${id}/chart?created_at=2024-06-03,2024-06-08`,
+  }
+
+  return requestBackend(config)
+}

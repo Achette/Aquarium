@@ -1,13 +1,12 @@
 import { useMedia } from '@/hooks'
+import { useSelector } from 'react-redux'
 import { HStack } from '@chakra-ui/react'
-import iconPH from '@/assets/icons/iconPh.svg'
+import { BuildSVG } from '@/utils/buildSVG'
 import { SensorInfoBox } from './SensorInfoBox'
-import iconSat from '@/assets/icons/iconSat.svg'
-import iconTemp from '@/assets/icons/iconTemp.svg'
 import iconFeed from '@/assets/icons/iconFeed.svg'
 import iconClear from '@/assets/icons/iconClean.svg'
-import iconLumini from '@/assets/icons/iconLumini.svg'
-import iconLevel from '@/assets/icons/iconWaterLevel.svg'
+import { getSensorsByAquariumId } from '@/redux/reducers/sensorsDetails'
+import { BuildMetricsValue } from '@/utils/buildMetrics'
 
 type SensorDetailsProps = {
   cleanDate: string
@@ -17,6 +16,8 @@ type SensorDetailsProps = {
 export const SensorDetails = ({ cleanDate, feedDate }: SensorDetailsProps) => {
   const { isMobile } = useMedia()
 
+  const sensors = useSelector(getSensorsByAquariumId)
+
   return (
     <HStack
       flexWrap="wrap"
@@ -25,19 +26,18 @@ export const SensorDetails = ({ cleanDate, feedDate }: SensorDetailsProps) => {
       pt={`${isMobile}` ? '1.5rem' : '3rem'}
       justifyContent="center"
     >
-      <SensorInfoBox icon={iconTemp} description="Temperatura" info="27 C" />
-      <SensorInfoBox icon={iconSat} description="Saturação" info="9,07 ppm" />
-      <SensorInfoBox icon={iconPH} description="pH" info="7" />
-      <SensorInfoBox
-        icon={iconLevel}
-        description="Variação Nível Água"
-        info="17,5 ml"
-      />
-      <SensorInfoBox
-        icon={iconLumini}
-        description="Luminosidade"
-        info="35 lm"
-      />
+      {sensors.map((sensor) => (
+        <SensorInfoBox
+          key={sensor.id}
+          icon={BuildSVG(sensor.name)}
+          description={sensor.name}
+          info={BuildMetricsValue(
+            sensor.name,
+            sensor.current.replace(',', '.')
+          )}
+        />
+      ))}
+
       <SensorInfoBox
         icon={iconClear}
         description="Última Limpeza"
