@@ -20,6 +20,7 @@ export const StatisticDataCalcAndShow = ({
       <Text fontSize="0.75rem">Moda: <strong>{calculated?.moda}</strong></Text>
       <Text fontSize="0.75rem">Desvio Padrão: <strong>{calculated?.DesvioPadrao}</strong></Text>
       <Text fontSize="0.75rem">Assimetria: <strong>{calculated?.Assimetria}</strong></Text>
+      <Text fontSize="0.75rem">Variância: <strong>{calculated?.Variancia}</strong></Text>
       <Text fontSize="0.75rem">Curtose: <strong>{calculated?.Curtose}</strong></Text>
     </>
   )
