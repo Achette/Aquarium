@@ -36,8 +36,14 @@ function App() {
 
           <Route path={`/aquarium/:id`} element={<AquariumDash />}>
             <Route index element={<AquariumInfo />} />
-            <Route path={`/aquarium/:id/controls`} element={<AquariumControl />} />
-            <Route path={`/aquarium/:id/dashboards`} element={<AquariumDashboard />} />
+            <Route
+              path={`/aquarium/:id/controls`}
+              element={<AquariumControl />}
+            />
+            <Route
+              path={`/aquarium/:id/dashboards`}
+              element={<AquariumDashboard />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>

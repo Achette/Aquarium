@@ -14,13 +14,11 @@ import {
   Scatter,
 } from 'recharts'
 
-export default function ComposedChartWithAxisLabels({
-  dataGraph,
-}: ChartDataProps) {
+export const ComposedChartWithAxisLabels = ({ dataGraph }: ChartDataProps) => {
   const { isMobileOrTablet } = useMedia()
 
   return (
-    <ResponsiveContainer width={isMobileOrTablet ? '100%' : '50%'} height="55%">
+    <ResponsiveContainer width={isMobileOrTablet ? '100%' : '50%'} height="50%">
       <ComposedChart
         width={500}
         height={400}
