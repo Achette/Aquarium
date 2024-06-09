@@ -1,5 +1,6 @@
 import { useMedia } from '@/hooks'
 import { useSelector } from 'react-redux'
+import { PiSigmaThin } from 'react-icons/pi'
 import {
   Box,
   Button,
@@ -24,7 +25,6 @@ import {
   StatisticDataCalcAndShow,
   TwoLinesChart,
 } from '@/components'
-import { PiSigmaThin } from 'react-icons/pi'
 import { ExtractDataToStatistic } from '@/utils/extractDataToStatistic'
 
 export const AquariumDashboard = () => {
