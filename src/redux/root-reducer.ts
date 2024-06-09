@@ -5,6 +5,7 @@ import accessoriesDetails from './reducers/accessoriesDetails'
 import sensorsDetails from './reducers/sensorsDetails'
 import graphSlice from './reducers/graphSlice'
 import aquariumIdSlice from './reducers/aquariumIdSlice'
+import aquariumSlice from './reducers/aquariumSlice'
 
 export const rootReducer = combineReducers({
   aquariumDetails,
@@ -13,4 +14,5 @@ export const rootReducer = combineReducers({
   sensorsDetails,
   graphSlice,
   aquariumIdSlice,
+  aquariumSlice
 })

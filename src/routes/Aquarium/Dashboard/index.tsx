@@ -101,10 +101,9 @@ export const AquariumDashboard = () => {
           h="fit-content"
         >
           <ModalHeader color="blue.900" p="0.5rem">
-            Análise Estatística
+            Estatística Descritiva
           </ModalHeader>
           <ModalBody p="0.5rem" overflow="auto" h="90%">
-            <Text color="blue.900">Estatística Descritiva</Text>
             {luminosidade.length > 4 && (
               <StatisticDataCalcAndShow
                 title="Luminosidade"

@@ -1,15 +1,40 @@
+import React from 'react'
 import { useMedia } from '@/hooks'
 import { useSelector } from 'react-redux'
 import { InfoHeader } from '@/components'
+import { AccessoriesProps } from '@/models'
 import { Accessories } from './Accessories'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import { getAccessoriesByAquariumId } from '@/redux/reducers/accessoriesDetails'
+
+type AquariumControlProps = AccessoriesProps & {
+  selected: boolean
+}
 
 export const AquariumControl = () => {
   const { isMobileOrTablet } = useMedia()
   const accessories = useSelector(getAccessoriesByAquariumId)
 
-  const filteredAccessories = accessories.filter((item) => item.name !== 'Plantas naturais')
+  const [filteredAccessories, setFilteredAccessories] = React.useState<
+    AquariumControlProps[]
+  >(
+    accessories
+      .map((item) => ({
+        ...item,
+        selected: false,
+      }))
+      .filter((item) => item.name !== 'Plantas naturais')
+  )
+
+  const handleAccessoryClick = (id: string) => {
+    setFilteredAccessories((prevAccessories) =>
+      prevAccessories.map((accessory) =>
+        accessory.id === id
+          ? { ...accessory, selected: !accessory.selected }
+          : accessory
+      )
+    )
+  }
 
   return (
     <Flex
@@ -23,7 +48,13 @@ export const AquariumControl = () => {
         <InfoHeader heading="Controles" />
         {accessories.length > 0 ? (
           filteredAccessories.map((accessory) => (
-            <Accessories key={accessory.id} name={accessory.name} />
+            <Accessories
+              key={accessory.id}
+              id={accessory.id}
+              name={accessory.name}
+              selected={accessory.selected}
+              onHandleClick={() => handleAccessoryClick(accessory.id)}
+            />
           ))
         ) : (
           <Text

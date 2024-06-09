@@ -4,9 +4,17 @@ import { BuildSVG } from '@/utils/buildSVG'
 import { Flex, Icon, Image, Text } from '@chakra-ui/react'
 
 type AccesoryProps = {
+  id: string
   name: string
+  selected: boolean
+  onHandleClick: (id: string) => void
 }
-export const Accessories = ({ name }: AccesoryProps) => {
+export const Accessories = ({
+  id,
+  name,
+  selected,
+  onHandleClick,
+}: AccesoryProps) => {
   const { isMobileOrTablet } = useMedia()
 
   return (
@@ -17,6 +25,10 @@ export const Accessories = ({ name }: AccesoryProps) => {
       justifyContent="space-between"
       alignItems="center"
       mt="1rem"
+      opacity={selected ? '' : '0.5'}
+      title="Clique para ativar o acessório do aquário"
+      cursor="pointer"
+      onClick={() => onHandleClick(id)}
     >
       <Flex alignItems="center" gap="1rem">
         <Image
