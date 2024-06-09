@@ -100,7 +100,7 @@ export const AquariumDashboard = () => {
           w={isMobile ? '22rem' : '45rem'}
           h="fit-content"
         >
-          <ModalHeader color="blue.900" p="0.5rem">
+          <ModalHeader color="blue.900" p="0.5rem" mb="-0.75rem">
             Estatística Descritiva
           </ModalHeader>
           <ModalBody p="0.5rem" overflow="auto" h="90%">
@@ -134,7 +134,7 @@ export const AquariumDashboard = () => {
               />
             )}
           </ModalBody>
-          <ModalFooter p="0.5rem">
+          <ModalFooter p="0.5rem"  mt="-0.75rem">
             <Button variant="ghost" color="red.400" onClick={onClose}>
               Fechar
             </Button>
