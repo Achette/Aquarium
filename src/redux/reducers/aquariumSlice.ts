@@ -3,18 +3,7 @@ import { AquariumProps } from '@/models'
 import { getAllAquariums } from '@/services/aquarium-services'
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-const initialState: AquariumProps[] = [
-  {
-    id: '',
-    name: '',
-    format_aquarium: '',
-    material: '',
-    thickness: '',
-    capacity: '',
-    height: '',
-    voltage: '',
-  },
-]
+const initialState: AquariumProps[] = []
 
 const aquariumSlice = createSlice({
   name: 'aquarium',
