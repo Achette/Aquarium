@@ -118,6 +118,7 @@ export const Login = () => {
           borderRadius="3.75rem"
           bg="blue.900"
           color="white.400"
+          _hover={{ bgColor: 'blue.500' }}
           mt="1.5rem"
         >
           Entrar
