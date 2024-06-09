@@ -10,8 +10,8 @@ import React from 'react'
 
 export const AquariumInfo = () => {
   const { isDesktop } = useMedia()
-  const [cleanDate, setCleanDate] = React.useState('--/--/----')
-  const [feedDate, setFeedDate] = React.useState('--/--/---- | hh:mm')
+  const [cleanDate, setCleanDate] = React.useState('Sem registro')
+  const [feedDate, setFeedDate] = React.useState('Sem registro')
 
   const handleAddCleanDate = (date: string) => {
     setCleanDate(date)
@@ -23,8 +23,6 @@ export const AquariumInfo = () => {
 
   const details = useSelector(getAquariumDetails)
   const pets = useSelector(getPetsByAquariumId)
-
-
 
   return (
     <VStack

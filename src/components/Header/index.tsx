@@ -2,15 +2,21 @@ import { LogoSm } from '../LogoSm'
 import { PiPowerFill } from 'react-icons/pi'
 import { useNavigate } from 'react-router-dom'
 import { Avatar, HStack, Icon, Divider, Flex } from '@chakra-ui/react'
-import { removeUser } from '@/hooks'
+import { getUser, removeUser } from '@/hooks'
+import React from 'react'
 
 export const Header = () => {
   const navigate = useNavigate()
+  const [user, setUser] = React.useState<string>()
 
-  const handleLogout = () => {
+  const handleLogout = React.useCallback(() => {
     removeUser()
     navigate('/')
-  }
+  }, [navigate])
+
+  React.useEffect(() => {
+    setUser(getUser() || '')
+  }, [])
 
   return (
     <HStack justifyContent="space-around" mt="1.5rem">
@@ -24,7 +30,7 @@ export const Header = () => {
           borderRadius="6rem"
         >
           <Avatar
-            name="Igor Achete"
+            name={user}
             bgColor="blue.900"
             color="white.900"
             size="sm"

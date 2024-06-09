@@ -13,10 +13,14 @@ import {
   VStack,
   useToast,
 } from '@chakra-ui/react'
+import { useSelector } from 'react-redux'
+import { getAquariumId } from '@/redux/reducers/aquariumIdSlice'
 
 export const AquariumAccessory = () => {
   const toast = useToast()
   const navigate = useNavigate()
+  const { id } = useSelector(getAquariumId)
+
   const { isDesktop, isMobile, isMobileOrTablet } = useMedia()
 
   const [accessories, setAccessories] = React.useState(aquariumAccessories)
@@ -45,7 +49,7 @@ export const AquariumAccessory = () => {
       if (data.length) {
         await Promise.all(
           data.map(async (accessory) => {
-            await addAccesories({ name: accessory })
+            await addAccesories(id!, { name: accessory })
             toast({
               description: `${accessory} adicionado ao aquário`,
               containerStyle: { color: 'white' },
@@ -67,7 +71,7 @@ export const AquariumAccessory = () => {
         isClosable: true,
       })
     }
-  }, [accessories, isMobileOrTablet, navigate, toast])
+  }, [accessories, id, isMobileOrTablet, navigate, toast])
 
   return (
     <Box px={isDesktop ? '16%' : '.25rem'} mt="1.5rem">

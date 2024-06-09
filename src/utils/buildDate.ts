@@ -27,3 +27,25 @@ export const formatCurrentDateTime = (): string => {
 
   return `${formattedDay}/${formattedMonth}/${year} | ${formattedHours}:${formattedMinutes}`
 }
+
+const formatDate = (date: Date): string => {
+  const year = date.getFullYear()
+  const month = (date.getMonth() + 1).toString().padStart(2, '0')
+  const day = date.getDate().toString().padStart(2, '0')
+
+  return `${year}-${month}-${day}`
+}
+
+export const getCurrentAndPreviousDate = (): {
+  currentDate: string
+  previousDate: string
+} => {
+  const currentDate = new Date()
+  const previousDate = new Date(currentDate)
+  previousDate.setDate(currentDate.getDate() - 1)
+
+  return {
+    currentDate: formatDate(currentDate),
+    previousDate: formatDate(previousDate),
+  }
+}

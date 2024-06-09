@@ -1,7 +1,7 @@
 import { useAquarium } from '@/context'
 import { NewAquariumProps } from '@/models'
 import { useNavigate } from 'react-router-dom'
-import { saveAquariumId, useMedia } from '@/hooks'
+import { useMedia } from '@/hooks'
 import { AquariumFormats } from '@/components/Formats'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { createAquarium } from '@/services/aquarium-services'
@@ -18,14 +18,18 @@ import {
   Heading,
   Input,
   Text,
-  
   VStack,
   useToast,
 } from '@chakra-ui/react'
+import { useDispatch } from 'react-redux'
+import { storeAquariumId } from '@/redux/reducers/aquariumIdSlice'
+import { AppDispatch } from '@/redux/store'
 
 export const NewAquarium = () => {
   const toast = useToast()
   const navigate = useNavigate()
+  const dispatch = useDispatch<AppDispatch>()
+
   const { isMobile, isDesktop, isMobileOrTablet } = useMedia()
 
   const { format, material, powerSupply, thickness, height, volume } =
@@ -50,7 +54,7 @@ export const NewAquarium = () => {
 
     const response = await createAquarium(newAquarium)
     const { id, name } = response.data.result
-    saveAquariumId(id)
+    dispatch(storeAquariumId(id))
 
     toast({
       description: `Aquário ${name} criado com sucesso!`,
