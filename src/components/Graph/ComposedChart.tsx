@@ -1,4 +1,3 @@
-import { useMedia } from '@/hooks'
 import { ChartDataProps } from '@/models'
 import {
   ComposedChart,
@@ -15,10 +14,8 @@ import {
 } from 'recharts'
 
 export const ComposedChartWithAxisLabels = ({ dataGraph }: ChartDataProps) => {
-  const { isMobileOrTablet } = useMedia()
-
   return (
-    <ResponsiveContainer width={isMobileOrTablet ? '100%' : '50%'} height="50%">
+    <ResponsiveContainer width="85%" height="50%">
       <ComposedChart
         width={500}
         height={400}

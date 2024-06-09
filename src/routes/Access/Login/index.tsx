@@ -1,7 +1,7 @@
 import { UserProps } from '@/models'
 import { CiUnlock } from 'react-icons/ci'
 import { PiUserThin } from 'react-icons/pi'
-import { saveUser, useMedia } from '@/hooks'
+import { saveToken, saveUser, useMedia } from '@/hooks'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserService } from '@/services/auth-service'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -32,8 +32,10 @@ export const Login = () => {
   const onSubmit: SubmitHandler<UserProps> = async (data) => {
     try {
       const response = await UserService.login(data)
+      saveUser(response.result.username)
+
       if (!response.jwt) throw new Error(response.message)
-      saveUser(response.jwt)
+      saveToken(response.jwt)
 
       toast({
         description: `Bem vindo ${response.result.username}!`,
@@ -116,6 +118,7 @@ export const Login = () => {
           borderRadius="3.75rem"
           bg="blue.900"
           color="white.400"
+          _hover={{ bgColor: 'blue.500' }}
           mt="1.5rem"
         >
           Entrar

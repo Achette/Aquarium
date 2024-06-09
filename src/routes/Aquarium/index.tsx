@@ -24,7 +24,10 @@ import {
   fetchAccessoriesAquarium,
   resetAccessories,
 } from '@/redux/reducers/accessoriesDetails'
-import { fetchDataForGraphs, resetSensorValues } from '@/redux/reducers/graphSlice'
+import {
+  fetchDataForGraphs,
+  resetSensorValues,
+} from '@/redux/reducers/graphSlice'
 
 export const AquariumDash = () => {
   const { id } = useParams()

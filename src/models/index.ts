@@ -83,3 +83,10 @@ export type ChartDataProps = {
     temperatura: string
   }[]
 }
+
+export interface AccessoriesProps {
+  created_at: string
+  id: string
+  name: string
+  updated_at: string
+}

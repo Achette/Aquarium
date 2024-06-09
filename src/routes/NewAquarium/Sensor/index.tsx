@@ -13,11 +13,14 @@ import {
   VStack,
   useToast,
 } from '@chakra-ui/react'
+import { useSelector } from 'react-redux'
+import { getAquariumId } from '@/redux/reducers/aquariumIdSlice'
 
 export const AquariumSensor = () => {
   const { isDesktop, isMobile, isMobileOrTablet } = useMedia()
   const navigate = useNavigate()
   const toast = useToast()
+  const { id } = useSelector(getAquariumId)
 
   const [sensors, setSensors] = React.useState(aquariumSensors)
 
@@ -45,7 +48,7 @@ export const AquariumSensor = () => {
       if (data.length) {
         await Promise.all(
           data.map(async (sensor) => {
-            await addSensors({ name: sensor })
+            await addSensors(id, { name: sensor })
             toast({
               description: `${sensor} adicionado ao aquário`,
               containerStyle: { color: 'white' },
@@ -66,7 +69,7 @@ export const AquariumSensor = () => {
         isClosable: true,
       })
     }
-  }, [isMobileOrTablet, navigate, sensors, toast])
+  }, [id, isMobileOrTablet, navigate, sensors, toast])
 
   return (
     <Box px={isDesktop ? '16%' : '.25rem'} mt="1.5rem">

@@ -1,16 +1,15 @@
-import { getAquariumId } from '@/hooks'
 import { AxiosRequestConfig } from 'axios'
 import { requestBackend } from './request'
+import { getCurrentAndPreviousDate } from '@/utils'
 
 type NewSensorsProps = {
   name: string
 }
 
-export const addSensors = async (data: NewSensorsProps) => {
-  const aquariumId = getAquariumId()
+export const addSensors = async (id: string, data: NewSensorsProps) => {
   const config: AxiosRequestConfig = {
     method: 'POST',
-    url: `/aquarium/${aquariumId}/sensors`,
+    url: `/aquarium/${id}/sensors`,
     data,
   }
 
@@ -27,9 +26,11 @@ export const getAllSensor = async (id: string) => {
 }
 
 export const getAllOldSensor = async (id: string) => {
+  const {currentDate, previousDate} = getCurrentAndPreviousDate()
+  
   const config: AxiosRequestConfig = {
     method: 'GET',
-    url: `/aquarium/${id}/chart?created_at=2024-06-03,2024-06-08`,
+    url: `/aquarium/${id}/chart?created_at=${previousDate},${currentDate}`,
   }
 
   return requestBackend(config)

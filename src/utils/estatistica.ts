@@ -1,6 +1,6 @@
 /* eslint-disable */
 // @ts-nocheck
-import { dados } from '../assets/helpers/dados.ts'
+
 
 export function Compute(form) {
   let N = 0
@@ -207,6 +207,4 @@ export function Compute(form) {
   }
 }
 
-const lumini = dados.map((data) => data.luminosidade)
 
-console.log(Compute(lumini))

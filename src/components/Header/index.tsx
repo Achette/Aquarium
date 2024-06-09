@@ -1,16 +1,27 @@
+import React from 'react'
 import { LogoSm } from '../LogoSm'
+import { useDispatch } from 'react-redux'
 import { PiPowerFill } from 'react-icons/pi'
 import { useNavigate } from 'react-router-dom'
+import { getUser, removeToken, removeUser } from '@/hooks'
+import { resetAllAquarium } from '@/redux/reducers/aquariumSlice'
 import { Avatar, HStack, Icon, Divider, Flex } from '@chakra-ui/react'
-import { removeUser } from '@/hooks'
 
 export const Header = () => {
   const navigate = useNavigate()
+  const [user, setUser] = React.useState<string>()
+  const dispatch = useDispatch()
 
-  const handleLogout = () => {
+  const handleLogout = React.useCallback(() => {
+    removeToken()
     removeUser()
+    dispatch(resetAllAquarium())
     navigate('/')
-  }
+  }, [dispatch, navigate])
+
+  React.useEffect(() => {
+    setUser(getUser() || '')
+  }, [])
 
   return (
     <HStack justifyContent="space-around" mt="1.5rem">
@@ -24,7 +35,7 @@ export const Header = () => {
           borderRadius="6rem"
         >
           <Avatar
-            name="Igor Achete"
+            name={user}
             bgColor="blue.900"
             color="white.900"
             size="sm"
@@ -36,7 +47,7 @@ export const Header = () => {
             w="32px"
             h="32px"
             color="blue.900"
-            onClick={() => handleLogout()}
+            onClick={handleLogout}
             cursor="pointer"
           />
         </HStack>

@@ -1,10 +1,10 @@
-import { getUser } from '@/hooks'
+import { getAccessToken } from '@/hooks'
 import { BASE_URL } from '@/constants/system'
 import axios, { AxiosRequestConfig } from 'axios'
 
 export const requestBackend = (config: AxiosRequestConfig) => {
   const headers = {
-    authorization: getUser(),
+    authorization: getAccessToken(),
   }
 
   return axios({

@@ -2,7 +2,6 @@ import { RootState } from '../store'
 import { getAquariumById } from '@/services/aquarium-services'
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-
 interface Details {
   name: string
   format_aquarium: string

@@ -1,4 +1,3 @@
-import { getAquariumId } from '@/hooks'
 import { requestBackend } from './request'
 import { AxiosRequestConfig } from 'axios'
 
@@ -7,11 +6,10 @@ type NewPetsProps = {
   quantity: number
 }
 
-export const addPets = async (data: NewPetsProps) => {
-  const aquariumId = getAquariumId()
+export const addPets = async (id: string, data: NewPetsProps) => {
   const config: AxiosRequestConfig = {
     method: 'POST',
-    url: `/aquarium/${aquariumId}/pets`,
+    url: `/aquarium/${id}/pets`,
     data,
   }
 

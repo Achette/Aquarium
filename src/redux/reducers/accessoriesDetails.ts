@@ -1,15 +1,9 @@
+import { AccessoriesProps } from '@/models'
 import { RootState } from '../store'
 import { getAllAccessories } from '@/services/accessories-services'
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-interface Accessories {
-  created_at: string
-  id: string
-  name: string
-  updated_at: string
-}
-
-const initialState: Accessories[] = [
+const initialState: AccessoriesProps[] = [
   {
     id: '',
     created_at: '',
@@ -29,7 +23,7 @@ const accessorySlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       fetchAccessoriesAquarium.fulfilled,
-      (_, action: PayloadAction<Accessories[]>) => {
+      (_, action: PayloadAction<AccessoriesProps[]>) => {
         return action.payload
       }
     )

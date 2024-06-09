@@ -1,6 +1,5 @@
 import React from 'react'
 import { useMedia } from '@/hooks'
-import * as localStorageService from '@/hooks'
 import { useNavigate } from 'react-router-dom'
 import { FaMinus, FaPlus } from 'react-icons/fa6'
 import { addPets } from '@/services/pets-services'
@@ -17,11 +16,19 @@ import {
   VStack,
   useToast,
 } from '@chakra-ui/react'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  clearAquariumId,
+  getAquariumId,
+} from '@/redux/reducers/aquariumIdSlice'
+import { AppDispatch } from '@/redux/store'
 
 export const AquariumPets = () => {
   const toast = useToast()
   const navigate = useNavigate()
   const { isDesktop, isMobile, isMobileOrTablet } = useMedia()
+  const dispatch = useDispatch<AppDispatch>()
+  const { id } = useSelector(getAquariumId)
 
   const [pets, setPets] = React.useState(aquariumPets)
 
@@ -76,7 +83,7 @@ export const AquariumPets = () => {
       if (selectedPets.length) {
         await Promise.all(
           selectedPets.map(async (pet) => {
-            await addPets({ species: pet.species, quantity: pet.quantity })
+            await addPets(id, { species: pet.species, quantity: pet.quantity })
             toast({
               description: `${pet.quantity} ${pet.species}(s) adicionado(s) ao aquário`,
               containerStyle: { color: 'white' },
@@ -98,9 +105,9 @@ export const AquariumPets = () => {
         isClosable: true,
       })
     } finally {
-      localStorageService.removeAquariumId()
+      dispatch(clearAquariumId())
     }
-  }, [isMobileOrTablet, navigate, pets, toast])
+  }, [dispatch, id, isMobileOrTablet, navigate, pets, toast])
 
   return (
     <Box px={isDesktop ? '16%' : '.25rem'} mt="1.5rem">

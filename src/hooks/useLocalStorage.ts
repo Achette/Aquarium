@@ -13,7 +13,7 @@ export const saveToken = (token: string) => {
   localStorage.setItem(TOKEN_KEY, token)
 }
 
-export const getToken = (): string | null => {
+export const getAccessToken = (): string | null => {
   return localStorage.getItem(TOKEN_KEY)
 }
 
