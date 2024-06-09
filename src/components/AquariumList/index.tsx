@@ -100,6 +100,7 @@ export const AquariumList = ({
           onClick={() => onOpen()}
         />
       </HStack>
+      
       <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
         <ModalContent bgColor="white" w={isMobile ? '22rem' : ''}>
           <ModalHeader color="blue.900">Excluir item?</ModalHeader>

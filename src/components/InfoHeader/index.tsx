@@ -30,6 +30,7 @@ export const InfoHeader = ({ heading }: HeaderProps) => {
           {heading}
         </Text>
       </Flex>
+
       <Icon as={IoMdSettings} color="blue.900" h="1.5rem" w="1.5rem" />
     </Flex>
   )
