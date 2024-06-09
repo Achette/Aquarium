@@ -1,10 +1,15 @@
 import { useMedia } from '@/hooks'
-import { InfoHeader } from '@/components'
 import { useSelector } from 'react-redux'
-import { Box, Flex } from '@chakra-ui/react'
-import { BiaxialGraph } from '@/components/Graph/BiaxialChart'
+import { Box, Flex, Text } from '@chakra-ui/react'
 import { getAllSensorsValues } from '@/redux/reducers/graphSlice'
-import ComposedChartWithAxisLabels from '@/components/Graph/Chart1'
+import {
+  BiaxialGraph,
+  CardinalChart,
+  ComposedChartWithAxisLabels,
+  InfoHeader,
+  SimpleBarChart,
+  TwoLinesChart,
+} from '@/components'
 
 export const AquariumDashboard = () => {
   const { isMobileOrTablet, isDesktop } = useMedia()
@@ -23,10 +28,30 @@ export const AquariumDashboard = () => {
       <Box maxW="37rem" w="full">
         <InfoHeader heading="Dashboards" />
       </Box>
-      <Flex w="100%" h="100%" wrap="wrap" justifyContent="center">
-        <ComposedChartWithAxisLabels dataGraph={dataGraph} />
-        <BiaxialGraph />
-      </Flex>
+      {dataGraph.length > 0 ? (
+        <Flex w="100%" h="100%" wrap="wrap" justifyContent="center">
+          <ComposedChartWithAxisLabels dataGraph={dataGraph} />
+
+          {dataGraph[0].ph && dataGraph[0].temperatura && (
+            <BiaxialGraph dataGraph={dataGraph} />
+          )}
+
+          {dataGraph[0].luminosidade && dataGraph[0].nivel_oxigenio && (
+            <CardinalChart dataGraph={dataGraph} />
+          )}
+
+          {dataGraph[0].ph && dataGraph[0].nivel_oxigenio && (
+            <TwoLinesChart dataGraph={dataGraph} />
+          )}
+
+          {dataGraph[0].nivel_agua && <SimpleBarChart dataGraph={dataGraph} />}
+        </Flex>
+      ) : (
+        <Text color="blue.900" opacity="0.5" margin="auto auto">
+          Não há sensores cadastrado para este aquário ou os dados ainda não
+          estão disponíveis.
+        </Text>
+      )}
     </Flex>
   )
 }
