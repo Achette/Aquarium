@@ -1,6 +1,6 @@
+import { BuildSVG } from '@/utils'
 import { useMedia } from '@/hooks'
 import { deleteAquariumById } from '@/services/aquarium-services'
-import { BuildSVG } from '@/utils/buildSVG'
 import {
   Flex,
   HStack,

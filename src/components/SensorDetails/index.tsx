@@ -1,12 +1,11 @@
 import { useMedia } from '@/hooks'
 import { useSelector } from 'react-redux'
 import { HStack } from '@chakra-ui/react'
-import { BuildSVG } from '@/utils/buildSVG'
 import { SensorInfoBox } from './SensorInfoBox'
 import iconFeed from '@/assets/icons/iconFeed.svg'
 import iconClear from '@/assets/icons/iconClean.svg'
+import { BuildMetricsValue, BuildSVG } from '@/utils'
 import { getSensorsByAquariumId } from '@/redux/reducers/sensorsDetails'
-import { BuildMetricsValue } from '@/utils/buildMetrics'
 
 type SensorDetailsProps = {
   cleanDate: string

@@ -29,7 +29,16 @@ export const BiaxialGraph = ({ dataGraph }: ChartDataProps) => {
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="created_at" />
-        <YAxis yAxisId="left" orientation="left" stroke="#8884d8" />
+        <YAxis
+          yAxisId="left"
+          orientation="left"
+          stroke="#8884d8"
+          label={{
+            value: 'ºC',
+            offset: 0,
+            angle: -90,
+          }}
+        />
         <YAxis yAxisId="right" orientation="right" stroke="#82ca9d" />
         <Tooltip />
         <Legend />
