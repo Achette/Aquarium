@@ -1,7 +1,7 @@
 import { useMedia } from '@/hooks'
 import iconFood from '@/assets/icons/iconFood.svg'
 import iconClear from '@/assets/icons/iconClear.svg'
-import { getActualDate, formatCurrentDateTime } from '@/utils/buildDate'
+import { getActualDate, formatCurrentDateTime } from '@/utils'
 import { Flex, HStack, Image, Text, VStack, useToast } from '@chakra-ui/react'
 
 type CleanAndFeedButtonsProps = {

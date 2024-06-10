@@ -1,6 +1,7 @@
 import { useMedia } from '@/hooks'
 import { useSelector } from 'react-redux'
 import { PiSigmaThin } from 'react-icons/pi'
+import { ExtractDataToStatistic } from '@/utils'
 import {
   Box,
   Button,
@@ -25,7 +26,6 @@ import {
   StatisticDataCalcAndShow,
   TwoLinesChart,
 } from '@/components'
-import { ExtractDataToStatistic } from '@/utils/extractDataToStatistic'
 
 export const AquariumDashboard = () => {
   const { isMobileOrTablet, isDesktop, isMobile } = useMedia()

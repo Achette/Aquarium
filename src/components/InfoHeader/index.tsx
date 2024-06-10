@@ -1,6 +1,6 @@
 import { useMedia } from '@/hooks'
+import { BuildIconType } from '@/utils'
 import { IoMdSettings } from 'react-icons/io'
-import { BuildIconType } from '@/utils/buildSVG'
 import { Flex, Icon, Text } from '@chakra-ui/react'
 
 type HeaderProps = {

@@ -4,7 +4,7 @@ export const BuildMetricsValue = (name: string, value: string) => {
       return `${value}`
 
     case 'Nível de água':
-      return `${value} mm`
+      return `${value} cm`
 
     case 'Nível oxigênio':
       return `${value} ppm`

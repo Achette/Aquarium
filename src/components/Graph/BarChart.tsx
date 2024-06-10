@@ -24,6 +24,7 @@ export const SimpleBarChart = ({ dataGraph }: ChartDataProps) => {
             label={{
               value: 'cm',
               offset: 0,
+              angle: -90,
             }}
           />
           <Legend />

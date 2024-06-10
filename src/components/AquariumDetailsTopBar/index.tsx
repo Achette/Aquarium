@@ -1,6 +1,6 @@
+import { BuildSVG } from '@/utils'
 import { useMedia } from '@/hooks'
 import { useSelector } from 'react-redux'
-import { BuildSVG } from '@/utils/buildSVG'
 import { IoMdSettings } from 'react-icons/io'
 import { useNavigate } from 'react-router-dom'
 import { MdArrowBackIos } from 'react-icons/md'

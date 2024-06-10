@@ -1,4 +1,4 @@
-import { BuildSVG } from '@/utils/buildSVG'
+import { BuildSVG } from '@/utils'
 import { Divider, Flex, Image, Text } from '@chakra-ui/react'
 
 type Props = {

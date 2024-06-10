@@ -1,6 +1,6 @@
+import { BuildSVG } from '@/utils'
 import { useMedia } from '@/hooks'
 import { PiPowerFill } from 'react-icons/pi'
-import { BuildSVG } from '@/utils/buildSVG'
 import { Flex, Icon, Image, Text } from '@chakra-ui/react'
 
 type AccesoryProps = {

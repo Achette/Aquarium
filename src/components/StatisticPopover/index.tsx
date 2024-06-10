@@ -1,4 +1,4 @@
-import { Compute } from '@/utils/estatistica'
+import { Compute } from '@/utils'
 import { Heading, Text } from '@chakra-ui/react'
 
 type StatisticProps = {
