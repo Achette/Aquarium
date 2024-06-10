@@ -105,34 +105,42 @@ export const AquariumDashboard = () => {
             Estatística Descritiva
           </ModalHeader>
           <ModalBody p="0.5rem" overflow="auto" h="90%">
-            {luminosidade.length > 4 && (
-              <StatisticDataCalcAndShow
-                title="Luminosidade"
-                dataGraph={luminosidade}
-              />
-            )}
-            {temperatura.length > 4 && (
-              <StatisticDataCalcAndShow
-                title="Temperatura"
-                dataGraph={temperatura}
-              />
-            )}
-            {saturacao.length > 4 && (
-              <StatisticDataCalcAndShow
-                title="Nível oxígenio"
-                dataGraph={saturacao}
-              />
-            )}
+            {dataGraph.length < 4 ? (
+              <Text p="1rem" color="blue.900">
+                Necessário ao menos 4 registros para calcular a estatística
+              </Text>
+            ) : (
+              <>
+                {luminosidade.length > 4 && (
+                  <StatisticDataCalcAndShow
+                    title="Luminosidade"
+                    dataGraph={luminosidade}
+                  />
+                )}
+                {temperatura.length > 4 && (
+                  <StatisticDataCalcAndShow
+                    title="Temperatura"
+                    dataGraph={temperatura}
+                  />
+                )}
+                {saturacao.length > 4 && (
+                  <StatisticDataCalcAndShow
+                    title="Nível oxígenio"
+                    dataGraph={saturacao}
+                  />
+                )}
 
-            {pH.length > 4 && (
-              <StatisticDataCalcAndShow title="pH" dataGraph={pH} />
-            )}
+                {pH.length > 4 && (
+                  <StatisticDataCalcAndShow title="pH" dataGraph={pH} />
+                )}
 
-            {nivelAgua.length > 4 && (
-              <StatisticDataCalcAndShow
-                title="Nível água"
-                dataGraph={nivelAgua}
-              />
+                {nivelAgua.length > 4 && (
+                  <StatisticDataCalcAndShow
+                    title="Nível água"
+                    dataGraph={nivelAgua}
+                  />
+                )}
+              </>
             )}
           </ModalBody>
           <ModalFooter p="0.5rem" mt="-0.75rem">

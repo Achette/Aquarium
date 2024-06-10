@@ -82,6 +82,7 @@ export type ChartDataProps = {
     nivel_oxigenio: string
     ph: string
     temperatura: string
+    saturacao: string
   }[]
 }
 

@@ -30,7 +30,6 @@ export const Register = () => {
   const { isMobileOrTablet } = useMedia()
 
   const onSubmit: SubmitHandler<NewUserProps> = async (data) => {
-  
     try {
       await UserService.create(data)
 

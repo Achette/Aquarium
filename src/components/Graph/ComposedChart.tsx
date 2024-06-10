@@ -14,6 +14,7 @@ import {
 } from 'recharts'
 
 export const ComposedChartWithAxisLabels = ({ dataGraph }: ChartDataProps) => {
+
   return (
     <ResponsiveContainer width="85%" height="50%">
       <ComposedChart
@@ -54,8 +55,8 @@ export const ComposedChartWithAxisLabels = ({ dataGraph }: ChartDataProps) => {
         {dataGraph[0].luminosidade && (
           <Line type="monotone" dataKey="luminosidade" stroke="#ff78FF" />
         )}
-        {dataGraph[0].nivel_oxigenio && (
-          <Line type="monotone" dataKey="nivel_oxigenio" stroke="#ff7300" />
+        {dataGraph[0].saturacao && (
+          <Line type="monotone" dataKey="saturacao" stroke="#ff7300" />
         )}
         {dataGraph[0].ph && <Scatter dataKey="ph" fill="red" />}
       </ComposedChart>
