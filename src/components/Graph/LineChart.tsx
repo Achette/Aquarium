@@ -16,7 +16,7 @@ export const TwoLinesChart = ({ dataGraph }: ChartDataProps) => {
   const { isMobileOrTablet } = useMedia()
 
   return (
-    <Box p="1rem" width={isMobileOrTablet ? '100%' : '40%'} height="50%">
+    <Box p="1rem" width={isMobileOrTablet ? '100%' : '50%'} height="50%">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart width={500} height={300} data={dataGraph}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -26,7 +26,7 @@ export const TwoLinesChart = ({ dataGraph }: ChartDataProps) => {
           <Legend />
           <Line
             type="monotone"
-            dataKey="nivel_oxigenio"
+            dataKey="saturacao"
             stroke="#8884d8"
             activeDot={{ r: 8 }}
           />

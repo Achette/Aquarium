@@ -15,7 +15,7 @@ import {
 export const SimpleBarChart = ({ dataGraph }: ChartDataProps) => {
   const { isMobileOrTablet } = useMedia()
   return (
-    <Box p="1rem" width={isMobileOrTablet ? '100%' : '40%'} height="50%">
+    <Box p="1rem" width={isMobileOrTablet ? '100%' : '50%'} height="50%">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart width={150} height={40} data={dataGraph}>
           <CartesianGrid strokeDasharray="3 3" />

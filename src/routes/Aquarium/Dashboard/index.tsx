@@ -32,6 +32,7 @@ export const AquariumDashboard = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const dataGraph = useSelector(getAllSensorsValues)
+
   const { luminosidade, pH, temperatura, nivelAgua, saturacao } =
     ExtractDataToStatistic(dataGraph)
 
@@ -73,11 +74,11 @@ export const AquariumDashboard = () => {
               <BiaxialGraph dataGraph={dataGraph} />
             )}
 
-            {dataGraph[0].luminosidade && dataGraph[0].nivel_oxigenio && (
+            {dataGraph[0].luminosidade && saturacao && (
               <CardinalChart dataGraph={dataGraph} />
             )}
 
-            {dataGraph[0].ph && dataGraph[0].nivel_oxigenio && (
+            {dataGraph[0].ph && dataGraph[0].saturacao && (
               <TwoLinesChart dataGraph={dataGraph} />
             )}
 
@@ -134,7 +135,7 @@ export const AquariumDashboard = () => {
               />
             )}
           </ModalBody>
-          <ModalFooter p="0.5rem"  mt="-0.75rem">
+          <ModalFooter p="0.5rem" mt="-0.75rem">
             <Button variant="ghost" color="red.400" onClick={onClose}>
               Fechar
             </Button>

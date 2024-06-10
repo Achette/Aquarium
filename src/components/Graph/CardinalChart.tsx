@@ -18,7 +18,7 @@ export const CardinalChart = ({ dataGraph }: ChartDataProps) => {
   const { isMobileOrTablet } = useMedia()
 
   return (
-    <Box p="1rem" width={isMobileOrTablet ? '100%' : '40%'} height="50%">
+    <Box p="1rem" width={isMobileOrTablet ? '100%' : '50%'} height="50%">
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           width={500}
@@ -45,7 +45,7 @@ export const CardinalChart = ({ dataGraph }: ChartDataProps) => {
           />
           <Area
             type={cardinal}
-            dataKey="nivel_oxigenio"
+            dataKey="saturacao"
             stroke="#82ca9d"
             fill="#82ca9d"
             fillOpacity={0.3}

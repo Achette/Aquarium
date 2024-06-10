@@ -67,7 +67,7 @@ export const BuildSVG = (name: string) => {
       case 'Nível de água':
         return iconLevel
 
-      case 'Nível oxigênio':
+      case 'Saturação':
         return iconSat
 
       case 'Luminosidade':
