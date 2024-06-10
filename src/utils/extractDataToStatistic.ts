@@ -5,7 +5,7 @@ export const ExtractDataToStatistic = (dataGraph: GraphsProps[]) => {
     .map((data) => parseFloat(data.luminosidade))
     .filter((value) => !isNaN(value))
   const saturacao = dataGraph
-    .map((data) => parseFloat(data.nivel_oxigenio))
+    .map((data) => parseFloat(data.saturacao))
     .filter((value) => !isNaN(value))
   const nivelAgua = dataGraph
     .map((data) => parseFloat(data.nivel_agua))

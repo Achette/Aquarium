@@ -9,6 +9,7 @@ const initialState: GraphsProps[] = [
     luminosidade: '',
     nivel_agua: '',
     nivel_oxigenio: '',
+    saturacao: '',
     ph: '',
     temperatura: '',
   },

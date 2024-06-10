@@ -8,6 +8,7 @@ interface Sensors {
   id: string
   name: string
   updated_at: string
+  saturacao: string
 }
 
 const initialState: Sensors[] = [
@@ -17,6 +18,7 @@ const initialState: Sensors[] = [
     id: '',
     name: '',
     updated_at: '',
+    saturacao: ''
   },
 ]
 

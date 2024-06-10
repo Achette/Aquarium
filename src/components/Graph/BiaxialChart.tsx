@@ -15,7 +15,7 @@ export const BiaxialGraph = ({ dataGraph }: ChartDataProps) => {
   const { isMobileOrTablet } = useMedia()
 
   return (
-    <ResponsiveContainer width={isMobileOrTablet ? '100%' : '40%'} height="50%">
+    <ResponsiveContainer width={isMobileOrTablet ? '100%' : '50%'} height="50%">
       <BarChart
         width={500}
         height={300}

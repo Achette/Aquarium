@@ -69,6 +69,7 @@ export interface GraphsProps {
   luminosidade: string
   nivel_agua: string
   nivel_oxigenio: string
+  saturacao: string
   ph: string
   temperatura: string
 }
